@@ -1,0 +1,39 @@
+.bg-login {
+    position: relative;
+    background-color: #053878;
+}
+.login-logout {
+    font-weight: 600;
+    color: #fff;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        transition: opacity linear 0.2s;
+    }
+}
+
+.nav-bg {
+    position: sticky;
+    top: 0;
+    background: url('../../assets/imgs/navbar_bg.png');
+    background-repeat: repeat-x;
+    height: 110px;
+    background-size: 200px 110px;
+    z-index: 1000;
+    box-shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.42), 0 3px 20px 0 rgba(0, 0, 0, 0.12),
+        0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    .nav_items {
+        background-color: #053878;
+        color: #fff;
+        font-weight: 600;
+        padding: 5px 10px;
+        border-radius: 7px;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity linear 0.2s;
+        }
+    }
+}
