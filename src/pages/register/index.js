@@ -17,7 +17,7 @@ function Register() {
                     SoDienThoai: values.PhoneNumber,
                     DiaChi: values.Address,
                 };
-                await RegisterKH(dataKH)
+                await RegisterKH(dataKH);
                 // .then((res) => console.log(res));
                 notification.open({
                     type: 'success',
@@ -40,15 +40,17 @@ function Register() {
     };
     return (
         <div className="mt-5 d-flex flex-column align-items-center ">
-            <h1 style={{ textTransform: 'uppercase', fontWeight: '600', color: '#053878' }}>Đăng ký</h1>
+            <h1 className="ms-5" style={{ textTransform: 'uppercase', fontWeight: '600', color: '#053878' }}>
+                Đăng ký
+            </h1>
             <Form
                 className="col-md-10 mt-4"
                 name="basic"
                 labelCol={{
-                    span: 5,
+                    span: 6,
                 }}
                 wrapperCol={{
-                    span: 16,
+                    span: 18,
                 }}
                 style={{
                     maxWidth: 600,

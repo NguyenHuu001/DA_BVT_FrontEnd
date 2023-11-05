@@ -14,7 +14,7 @@ function Header() {
                         className="container d-flex align-items-center justify-content-end "
                         style={{ height: '40px' }}
                     >
-                        <div className="d-flex ">
+                        <div className="d-flex">
                             <div className="ms-5 login-logout">
                                 <img src={flagEng} alt="flag English" style={{ height: '18px' }} />
                             </div>
