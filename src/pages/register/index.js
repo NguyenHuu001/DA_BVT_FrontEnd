@@ -13,7 +13,7 @@ function Register() {
                     TenDangNhap: values.UserName,
                     Email: values.Email,
                     MatKhau: values.PassWord,
-                    TenTaiKhoan: values.FullName,
+                    TenKH: values.FullName,
                     SoDienThoai: values.PhoneNumber,
                     DiaChi: values.Address,
                 };
@@ -40,17 +40,17 @@ function Register() {
     };
     return (
         <div className="mt-5 d-flex flex-column align-items-center ">
-            <h1 className="ms-5" style={{ textTransform: 'uppercase', fontWeight: '600', color: '#053878' }}>
+            <h1 className="ms-5" style={{ textTransform: 'uppercase', fontWeight: '600', color: '#fff' }}>
                 Đăng ký
             </h1>
             <Form
                 className="col-md-10 mt-4"
                 name="basic"
                 labelCol={{
-                    span: 6,
+                    span: 7,
                 }}
                 wrapperCol={{
-                    span: 18,
+                    span: 14,
                 }}
                 style={{
                     maxWidth: 600,

@@ -1,0 +1,90 @@
+.btn_searchTrain {
+    text-transform: uppercase;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #053878;
+    &:hover {
+        opacity: 0.8;
+        border-color: none;
+        transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+.title {
+    background-color: #18365f;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 24px;
+}
+.title_HTT {
+    color: #245eab !important;
+    padding: 24px;
+    text-transform: uppercase;
+}
+.title_table {
+    padding: 10px 24px;
+    font-weight: 700;
+    font-size: 18px;
+}
+.value_table {
+    padding: 10px 24px;
+    font-size: 18px;
+}
+.sw-btn-prev {
+    border: none;
+    padding: 12px 30px;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    cursor: not-allowed;
+    opacity: 0.65;
+    position: relative;
+    float: left;
+    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    background: #999 !important;
+    background-color: #f6b61d !important;
+    color: #000;
+    border-radius: 7px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.sw-btn-next {
+    -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    font: inherit;
+    overflow: visible;
+    -webkit-appearance: button;
+    font-family: inherit;
+    display: inline-block;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    padding: 12px 30px;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    will-change: box-shadow, transform;
+    background: #0a78b7 !important;
+    position: relative;
+    float: left;
+    color: #fff;
+    margin: 0;
+    background-color: #18365f !important;
+    border-radius: 7px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    &:hover {
+        color: #fff;
+        opacity: 0.8;
+    }
+}

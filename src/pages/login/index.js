@@ -1,12 +1,14 @@
 import { Button, Input, Form, notification } from 'antd'; // Import Form từ antd
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { LoginKH } from '../../services/BVT_service';
-
+import './login.scss';
 const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 
 function Login() {
+    const navigate = useNavigate();
     const onFinish = async (values) => {
         try {
             const data = {
@@ -14,12 +16,16 @@ function Login() {
                 TenDangNhap: values.username,
             };
             await LoginKH(data).then((res) => {
+                console.log();
+                localStorage.setItem('userName', res.DataKH[0].TenKH);
+                Cookies.set('Token', res.token, { expires: 5 });
                 notification.open({
                     type: 'success',
                     message: 'Đăng nhập thành công',
                     description: '',
                     duration: 1,
                 });
+                navigate('/home');
             });
         } catch (error) {
             notification.open({
@@ -32,12 +38,12 @@ function Login() {
     };
     return (
         <div className="mt-5 d-flex flex-column align-items-center ">
-            <h1 style={{ textTransform: 'uppercase', fontWeight: '600', color: '#053878' }}>Đăng nhập</h1>
+            <h1 style={{ textTransform: 'uppercase', fontWeight: '600', color: '#fff' }}>Đăng nhập</h1>
             <Form
                 className="col-md-10 mt-4"
                 name="basic"
                 labelCol={{
-                    span: 5,
+                    span: 7,
                 }}
                 wrapperCol={{
                     span: 14,
@@ -58,7 +64,7 @@ function Login() {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Vui lòng nhập tên tài khoản',
                         },
                     ]}
                 >
@@ -71,7 +77,7 @@ function Login() {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your password!',
+                            message: 'Vui lòng nhập mật khẩu',
                         },
                     ]}
                 >
