@@ -1,33 +1,32 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Input } from 'antd';
-
+import { useContext, useEffect, useState } from 'react';
+import { BookTicketContext } from '../contexts/bookticketcontext';
 function NguoiDatVe() {
+    const { fullName, phoneNumber, email, updateNDV } = useContext(BookTicketContext);
+    const [hoTen, setHoTen] = useState(fullName);
+    const [sdt, setSDT] = useState(phoneNumber);
+    const [gmail, setGmail] = useState(email);
+    const [form] = Form.useForm();
+    useEffect(() => {
+        updateNDV(hoTen, sdt, gmail);
+    }, [hoTen, sdt, gmail]);
+    useEffect(() => {
+        form.setFieldsValue({ FullName: hoTen, PhoneNumber: sdt, Email: gmail });
+    }, [hoTen, sdt, gmail]);
+
     return (
-        <>
+        <div className="step_one">
             <div className="title_HTT d-flex align-items-center">
                 <FontAwesomeIcon className="me-1" icon={faUser} size="lg" />
                 <h5 className="mb-0">Người đặt vé</h5>
             </div>
-            <div className="container mt-4 d-flex">
-                <Form
-                    className="col-lg-4 d-flex me-0"
-                    name="basic"
-                    labelCol={{
-                        span: 6,
-                    }}
-                    wrapperCol={{
-                        span: 24,
-                    }}
-                    style={{
-                        maxWidth: '100%',
-                    }}
-                    autoComplete="off"
-                >
+            <div className="container d-flex">
+                <Form form={form} name="myForm" initialValues={{ FullName: hoTen }}>
                     <Form.Item
-                        className="col-lg-12 mb-0"
-                        label="Họ tên"
                         name="FullName"
+                        label="Họ tên"
                         rules={[
                             {
                                 required: true,
@@ -35,14 +34,15 @@ function NguoiDatVe() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input onBlur={(e) => setHoTen(e.target.value)} />
                     </Form.Item>
                 </Form>
                 <Form
-                    className="col-lg-4 d-flex me-0"
-                    name="basic"
+                    form={form}
+                    className="col-lg-4 d-flex me-0 pe-4"
+                    name="dienthoai"
                     labelCol={{
-                        span: 8,
+                        span: 6,
                     }}
                     wrapperCol={{
                         span: 20,
@@ -63,14 +63,15 @@ function NguoiDatVe() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input onBlur={(e) => setSDT(e.target.value)} />
                     </Form.Item>
                 </Form>
                 <Form
+                    form={form}
                     className="col-lg-4 d-flex me-0"
-                    name="basic"
+                    name="email"
                     labelCol={{
-                        span: 5,
+                        span: 4,
                     }}
                     wrapperCol={{
                         span: 20,
@@ -92,11 +93,11 @@ function NguoiDatVe() {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input onBlur={(e) => setGmail(e.target.value)} />
                     </Form.Item>
                 </Form>
             </div>
-        </>
+        </div>
     );
 }
 

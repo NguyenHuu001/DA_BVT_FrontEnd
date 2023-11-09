@@ -18,7 +18,7 @@ function Login() {
             await LoginKH(data).then((res) => {
                 console.log();
                 localStorage.setItem('userName', res.DataKH[0].TenKH);
-                Cookies.set('Token', res.token, { expires: 5 });
+                Cookies.set('token', res.token, { expires: 5 });
                 notification.open({
                     type: 'success',
                     message: 'Đăng nhập thành công',

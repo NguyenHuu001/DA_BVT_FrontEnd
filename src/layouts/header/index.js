@@ -16,7 +16,7 @@ function Header() {
 
     const logOut = () => {
         localStorage.clear('userName');
-        Cookies.remove('Token');
+        Cookies.remove('token');
         notification.open({
             type: 'success',
             message: 'Đăng xuất thành công',

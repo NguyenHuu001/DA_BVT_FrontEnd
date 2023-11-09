@@ -2,9 +2,11 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DatePicker, Form, Input } from 'antd';
 import './component.scss';
+import { useEffect } from 'react';
 function HanhKhach() {
+    useEffect(() => {}, []);
     return (
-        <>
+        <div className="step_one">
             <div className="title_HTT d-flex align-items-center">
                 <FontAwesomeIcon className="me-1" icon={faUser} size="lg" />
                 <h5 className="mb-0">Hành khách 1</h5>
@@ -12,12 +14,12 @@ function HanhKhach() {
             <div className="container d-flex flex-wrap">
                 <Form
                     className="col-lg-4 me-0"
-                    name="basic"
+                    name="cmnd"
                     labelCol={{
-                        span: 11,
+                        span: 8,
                     }}
                     wrapperCol={{
-                        span: 24,
+                        span: 20,
                     }}
                     style={{
                         maxWidth: '100%',
@@ -41,7 +43,7 @@ function HanhKhach() {
                 </Form>
                 <Form
                     className="col-lg-4 me-0"
-                    name="basic"
+                    name="hotenkhach"
                     labelCol={{
                         span: 6,
                     }}
@@ -70,7 +72,7 @@ function HanhKhach() {
                 </Form>
                 <Form
                     className="col-lg-4 me-0"
-                    name="basic"
+                    name="emailkhach"
                     labelCol={{
                         span: 5,
                     }}
@@ -100,9 +102,38 @@ function HanhKhach() {
                 </Form>
                 <Form
                     className="col-lg-4 me-0"
-                    name="basic"
+                    name="noisinh"
                     labelCol={{
                         span: 8,
+                    }}
+                    wrapperCol={{
+                        span: 24,
+                    }}
+                    style={{
+                        maxWidth: '100%',
+                        display: 'block',
+                    }}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        className="col-lg-12 mb-0 "
+                        label="Nơi sinh"
+                        name="NoiSinh"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Vui lòng nhập Ngày sinh',
+                            },
+                        ]}
+                    >
+                        <Input style={{ width: '100%' }} />
+                    </Form.Item>
+                </Form>
+                <Form
+                    className="col-lg-4 me-0"
+                    name="ngaysinh"
+                    labelCol={{
+                        span: 6,
                     }}
                     wrapperCol={{
                         span: 24,
@@ -129,9 +160,9 @@ function HanhKhach() {
                 </Form>
                 <Form
                     className="col-lg-4 d-flex me-0"
-                    name="basic"
+                    name="dienthoaikhach"
                     labelCol={{
-                        span: 8,
+                        span: 6,
                     }}
                     wrapperCol={{
                         span: 20,
@@ -157,7 +188,7 @@ function HanhKhach() {
                 </Form>
                 <Form
                     className="col-lg-4 d-flex me-0"
-                    name="basic"
+                    name="quoctich"
                     labelCol={{
                         span: 8,
                     }}
@@ -184,7 +215,7 @@ function HanhKhach() {
                     </Form.Item>
                 </Form>
             </div>
-        </>
+        </div>
     );
 }
 

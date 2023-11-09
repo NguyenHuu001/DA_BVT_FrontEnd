@@ -15,4 +15,8 @@ const getALLChuyenTau = () => {
 const searchChuyenTau = (MaChuyenTau, SoLuong, NgayDi) => {
     return instance.get(`/api/searchChuyenTau/?MaChuyenTau=${MaChuyenTau}&SoLuong=${SoLuong}&NgayDi=${NgayDi}`);
 };
-export { RegisterKH, LoginKH, getALLChuyenTau, searchChuyenTau };
+//Lấy thông tin khách hàng với mã TKKH
+const getDetailKH = (config) => {
+    return instance.get('/api/getDetailKH', config);
+};
+export { RegisterKH, LoginKH, getALLChuyenTau, searchChuyenTau, getDetailKH };
