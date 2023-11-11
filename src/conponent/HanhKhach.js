@@ -2,14 +2,15 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DatePicker, Form, Input } from 'antd';
 import './component.scss';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { BookTicketContext } from '../contexts/bookticketcontext';
 import moment from 'moment';
 function HanhKhach() {
     const { hanhKhachList, handleInputChange } = useContext(BookTicketContext);
+    useEffect(() => {}, [hanhKhachList]);
 
     return (
-        <div className="step_one">
+        <div className="step_one" key={hanhKhachList}>
             {hanhKhachList.length > 0 &&
                 hanhKhachList.map((item, index) => (
                     <div key={index + item}>
@@ -33,12 +34,12 @@ function HanhKhach() {
                                     display: 'block',
                                 }}
                                 autoComplete="off"
-                                initialValues={{ [`CMNDKH${index}`]: item.CMNDKH || '' }}
+                                initialValues={{ [`CMNDHK${index}`]: item.CMNDHK || '' }}
                             >
                                 <Form.Item
                                     className="col-lg-12 mb-0 "
                                     label="CMND/Hộ chiếu"
-                                    name={`CMNDKH${index}`}
+                                    name={`CMNDHK${index}`}
                                     rules={[
                                         {
                                             required: true,
@@ -48,7 +49,7 @@ function HanhKhach() {
                                 >
                                     <Input
                                         onChange={(e) =>
-                                            handleInputChange(index, 'CMNDKH', e.target.value || item.CMNDKH)
+                                            handleInputChange(index, 'CMNDHK', e.target.value || item.CMNDHK)
                                         }
                                     />
                                 </Form.Item>
@@ -84,7 +85,7 @@ function HanhKhach() {
                                 </Form.Item>
                             </Form>
                             <Form
-                                initialValues={{ [`EmailKH${index}`]: item.EmailKH || '' }}
+                                initialValues={{ [`EmailHK${index}`]: item.EmailHK || '' }}
                                 className="col-lg-4 me-0"
                                 name={`emailkhach${index}`}
                                 labelCol={{
@@ -102,20 +103,20 @@ function HanhKhach() {
                                 <Form.Item
                                     className="col-lg-12 mb-0 "
                                     label="Email"
-                                    name={`EmailKH${index}`}
+                                    name={`EmailHK${index}`}
                                     rules={[
                                         {
-                                            required: true,
+                                            // required: true,
                                             type: 'email',
                                             message: 'Vui lòng nhập Email',
                                         },
                                     ]}
                                 >
-                                    <Input onChange={(e) => handleInputChange(index, 'EmailKH', e.target.value)} />
+                                    <Input onChange={(e) => handleInputChange(index, 'EmailHK', e.target.value)} />
                                 </Form.Item>
                             </Form>
                             <Form
-                                initialValues={{ [`NoiSinhKH${index}`]: item.NoiSinhKH || '' }}
+                                initialValues={{ [`NoiSinhHK${index}`]: item.NoiSinhHK || '' }}
                                 className="col-lg-4 me-0"
                                 name={`noisinh${index}`}
                                 labelCol={{
@@ -133,24 +134,24 @@ function HanhKhach() {
                                 <Form.Item
                                     className="col-lg-12 mb-0 "
                                     label="Nơi sinh"
-                                    name={`NoiSinhKH${index}`}
+                                    name={`NoiSinhHK${index}`}
                                     rules={[
                                         {
-                                            required: true,
-                                            message: 'Vui lòng nhập nơi sinh',
+                                            // required: true,
+                                            // message: 'Vui lòng nhập nơi sinh',
                                         },
                                     ]}
                                 >
                                     <Input
                                         style={{ width: '100%' }}
-                                        onChange={(e) => handleInputChange(index, 'NoiSinhKH', e.target.value)}
+                                        onChange={(e) => handleInputChange(index, 'NoiSinhHK', e.target.value)}
                                     />
                                 </Form.Item>
                             </Form>
                             <Form
                                 initialValues={
-                                    item.NgaySinhKH && {
-                                        [`NgaySinhKH${index}`]: moment(item.NgaySinhKH, 'YYYY/MM/DD') || '',
+                                    item.NgaySinhHK && {
+                                        [`NgaySinhHK${index}`]: moment(item.NgaySinhHK, 'YYYY/MM/DD') || '',
                                     }
                                 }
                                 className="col-lg-4 me-0"
@@ -170,7 +171,7 @@ function HanhKhach() {
                                 <Form.Item
                                     className="col-lg-12 mb-0 "
                                     label="Ngày sinh"
-                                    name={`NgaySinhKH${index}`}
+                                    name={`NgaySinhHK${index}`}
                                     rules={[
                                         {
                                             required: true,
@@ -180,12 +181,12 @@ function HanhKhach() {
                                 >
                                     <DatePicker
                                         style={{ width: '100%' }}
-                                        onChange={(e, dateString) => handleInputChange(index, 'NgaySinhKH', dateString)}
+                                        onChange={(e, dateString) => handleInputChange(index, 'NgaySinhHK', dateString)}
                                     />
                                 </Form.Item>
                             </Form>
                             <Form
-                                initialValues={{ [`SDTKH${index}`]: item.SDTKH || '' }}
+                                initialValues={{ [`SDTHK${index}`]: item.SDTHK || '' }}
                                 className="col-lg-4 d-flex me-0"
                                 name={`dienthoaikhach${index}`}
                                 labelCol={{
@@ -202,19 +203,19 @@ function HanhKhach() {
                                 <Form.Item
                                     className="col-lg-12 mb-0"
                                     label="Điện thoại"
-                                    name={`SDTKH${index}`}
+                                    name={`SDTHK${index}`}
                                     rules={[
                                         {
-                                            required: true,
-                                            message: 'Vui lòng số điện thoại!',
+                                            // required: true,
+                                            // message: 'Vui lòng số điện thoại!',
                                         },
                                     ]}
                                 >
-                                    <Input onChange={(e) => handleInputChange(index, 'SDTKH', e.target.value)} />
+                                    <Input onChange={(e) => handleInputChange(index, 'SDTHK', e.target.value)} />
                                 </Form.Item>
                             </Form>
                             <Form
-                                initialValues={{ [`QuocTichKH${index}`]: item.QuocTichKH || '' }}
+                                initialValues={{ [`QuocTichHK${index}`]: item.QuocTichHK || '' }}
                                 className="col-lg-4 d-flex me-0"
                                 name={`quoctich${index}`}
                                 labelCol={{
@@ -231,7 +232,7 @@ function HanhKhach() {
                                 <Form.Item
                                     className="col-lg-12 mb-0"
                                     label="Quốc tịch"
-                                    name={`QuocTichKH${index}`}
+                                    name={`QuocTichHK${index}`}
                                     rules={[
                                         {
                                             required: true,
@@ -239,7 +240,7 @@ function HanhKhach() {
                                         },
                                     ]}
                                 >
-                                    <Input onChange={(e) => handleInputChange(index, 'QuocTichKH', e.target.value)} />
+                                    <Input onChange={(e) => handleInputChange(index, 'QuocTichHK', e.target.value)} />
                                 </Form.Item>
                             </Form>
                         </div>

@@ -33,10 +33,11 @@ export const BookTicketProvider = ({ children }) => {
     // const [SDTHK, setSDTHK] = useState('');
     // const [quocTichHK, setQuocTichHK] = useState('');
 
-    //
+    //COMPONENT WRAPBOOKTICKET
     useEffect(() => {
         getALLTau();
     }, [detailTau]);
+    //khi thay đổi tàu đã chọn thì nó sẽ update lại thông tin
     useEffect(() => {
         updateChooseTau(chooseDetailTau);
     }, [chooseDetailTau]);
@@ -87,7 +88,7 @@ export const BookTicketProvider = ({ children }) => {
         }
     };
     const handleNext = () => {
-        if (step === 2) setDetailHK();
+        if (step === 2) checkHK();
         if (step === 0 && chooseDetailTau.length === 0) {
             notification.open({
                 type: 'error',
@@ -96,6 +97,13 @@ export const BookTicketProvider = ({ children }) => {
                 duration: 1,
             });
         } else if (step === 1 && (!fullName || !phoneNumber || !email)) {
+            notification.open({
+                type: 'error',
+                message: 'Thất bại',
+                description: 'Vui lòng nhập đủ thông tin',
+                duration: 1,
+            });
+        } else if (step === 2 && checkHK() <= soLuong && checkHK() > 0) {
             notification.open({
                 type: 'error',
                 message: 'Thất bại',
@@ -112,14 +120,14 @@ export const BookTicketProvider = ({ children }) => {
         step === 0 ? setStep(0) : setStep(step - 1);
         if (step === 1) setChooseDetaiTau([]);
     };
-    // hành trình đi
+    //COMPONENT HÀNH TRÌNH ĐI
     const updateChooseTau = (dataTau) => {
         setChooseDetaiTau(dataTau);
     };
     const updateBookingDetails = (newDetails) => {
         setBookingDetails(newDetails);
     };
-    //Người đặt vé
+    //COMPONENT NGƯỜI ĐẶT VÉ
     useEffect(() => {
         getTTKH();
     }, []);
@@ -147,29 +155,38 @@ export const BookTicketProvider = ({ children }) => {
         setEmail(Gmail);
         if (!fullName && !SDT && !Gmail) setStep(1);
     };
-    //hành khách
+    //COMPONENT HÀNH KHÁCH
     useEffect(() => {
         createHanhKhachList(soLuong);
     }, [soLuong]);
-    const setDetailHK = () => {
-        console.log(hanhKhachList);
+    //hàm check input của component hành khách
+    const checkHK = () => {
+        var counthk = 0;
+        hanhKhachList.map((value) => {
+            if (!value.CMNDHK || !value.HoTenHK || !value.NgaySinhHK || !value.QuocTichHK) {
+                counthk++;
+            }
+        });
+        return counthk;
     };
+    //hàm tạo mới hành khách
     const createHanhKhachList = (soLuong) => {
         const listKH = [];
         for (let i = 0; i < soLuong; i++) {
             const newHanhKhach = {
-                CMNDKH: '',
-                HoTenHK: '',
-                EmailKH: '',
-                NoiSinhKH: '',
-                NgaySinhKH: null,
-                SDTKH: '',
-                QuocTichKH: '',
+                // CMNDKH: '',
+                // HoTenHK: '',
+                // EmailKH: '',
+                // NoiSinhKH: '',
+                // NgaySinhKH: null,
+                // SDTKH: '',
+                // QuocTichKH: '',
             };
             listKH.push(newHanhKhach);
         }
         setHanhKhachList(listKH);
     };
+    //hàm cập nhật HanhKhachList khi input thay đổi
     const handleInputChange = (index, fieldName, value) => {
         setHanhKhachList((prevList) => {
             const updatedList = [...prevList];
@@ -203,7 +220,6 @@ export const BookTicketProvider = ({ children }) => {
                 handleNext,
                 handleBack,
                 updateChooseTau,
-                
                 handleInputChange,
             }}
         >
