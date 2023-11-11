@@ -76,10 +76,10 @@ function WrapBookTicket() {
                         <h3 className="mb-0">{title}</h3>
                     </div>
 
-                    {step === 1 && <HanhTrinhDi value={detailTau} />}
-                    {step === 2 && <NguoiDatVe />}
-                    {step === 3 && <HanhKhach />}
-                    {step === 4 && <ChonGheNgoi />}
+                    {step === 0 && <HanhTrinhDi value={detailTau} />}
+                    {step === 1 && <NguoiDatVe />}
+                    {step === 2 && <HanhKhach />}
+                    {step === 3 && <ChonGheNgoi />}
 
                     <nav className="navbar btn-toolbar sw-toolbar sw-toolbar-bottom d-flex justify-content-end px-4 pt-5 pb-4">
                         <div className="btn-group navbar-btn sw-btn-group pull-right" role="group">

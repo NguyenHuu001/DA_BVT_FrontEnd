@@ -22,8 +22,22 @@ function NguoiDatVe() {
                 <FontAwesomeIcon className="me-1" icon={faUser} size="lg" />
                 <h5 className="mb-0">Người đặt vé</h5>
             </div>
-            <div className="container d-flex">
-                <Form form={form} name="myForm" initialValues={{ FullName: hoTen }}>
+            <div className="container d-flex justify-content-between">
+                <Form
+                    form={form}
+                    labelCol={{
+                        span: 7,
+                    }}
+                    wrapperCol={{
+                        span: 20,
+                    }}
+                    style={{
+                        maxWidth: '100%',
+                    }}
+                    autoComplete="off"
+                    name="myForm"
+                    initialValues={{ FullName: hoTen }}
+                >
                     <Form.Item
                         name="FullName"
                         label="Họ tên"
@@ -39,16 +53,16 @@ function NguoiDatVe() {
                 </Form>
                 <Form
                     form={form}
-                    className="col-lg-4 d-flex me-0 pe-4"
+                    className="col-lg-4 d-flex me-0 "
                     name="dienthoai"
                     labelCol={{
                         span: 6,
                     }}
                     wrapperCol={{
-                        span: 20,
+                        span: 22,
                     }}
                     style={{
-                        maxWidth: '100%',
+                        Width: '100%',
                     }}
                     autoComplete="off"
                 >

@@ -1,15 +1,20 @@
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment/moment';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BookTicketContext } from '../contexts/bookticketcontext';
 import './component.scss';
 function HanhTrinhDi(detailTau) {
-    const arr = [1, 2];
-    const { updateBookingDetails } = useContext(BookTicketContext);
+    const { updateBookingDetails, updateChooseTau } = useContext(BookTicketContext);
     useEffect(() => {
         updateBookingDetails(detailTau.value);
     }, [detailTau.value]);
+    const formatTwoDigits = (number) => {
+        return number < 10 ? `0${number}` : `${number}`;
+    };
+    const handleRadioChange = (value) => {
+        updateChooseTau(value);
+    };
     return (
         <div className="step_one">
             <div className="title_HTT d-flex align-items-center">
@@ -32,6 +37,7 @@ function HanhTrinhDi(detailTau) {
                                 id={`chuyendi_id${index}`}
                                 name="chuyendi_name"
                                 type="radio"
+                                onChange={() => handleRadioChange(value)}
                             />
                             {value.TenChuyen}
                         </label>
@@ -39,7 +45,9 @@ function HanhTrinhDi(detailTau) {
                             {moment(value.NgayDi).format('DD/MM/YYYY')}
                         </label>
                         <label className="value_tablecd col-lg-2 cusor_check" htmlFor={`chuyendi_id${index}`}>
-                            {new Date(value.GioDi).getUTCHours()}:{new Date(value.GioDi).getUTCMinutes()}
+                            {`${formatTwoDigits(new Date(value.GioDi).getUTCHours())}:${formatTwoDigits(
+                                new Date(value.GioDi).getUTCMinutes(),
+                            )}`}
                         </label>
                         <label className="value_tablecd col-lg-2 cusor_check" htmlFor={`chuyendi_id${index}`}>
                             {value.TinhTrang}
