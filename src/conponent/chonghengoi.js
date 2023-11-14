@@ -1,5 +1,14 @@
+import { useContext, useEffect } from 'react';
+import { getALLChuyenTau } from '../services/BVT_service';
 import './component.scss';
+import { BookTicketContext } from '../contexts/bookticketcontext';
 function ChonGheNgoi() {
+    const { allGheNgoi, fecthAllChuyenTau } = useContext(BookTicketContext);
+
+    useEffect(() => {
+        fecthAllChuyenTau();
+    }, []);
+
     return (
         <>
             <div className="container">
@@ -28,7 +37,6 @@ function ChonGheNgoi() {
                                     <td className="col-lg-2 d-flex justify-content-center">1A</td>
                                     <td className="col-lg-3 d-flex justify-content-center">Người lớn</td>
                                 </tr>
-                                
                             </tbody>
                         </table>
                     </div>
@@ -36,15 +44,19 @@ function ChonGheNgoi() {
                         <div className="col-lg-12">
                             <h4>Vị trí chỗ ngồi</h4>
                         </div>
-                        <div className="col-lg-12">
-                            <button className="btn_vitri">1A</button>
-                            <button className="btn_vitri">1A</button>
-                            <button className="btn_vitri">1A</button>
-                            <button className="btn_vitri">1A</button>
-                            <button className="btn_vitri">1A</button>
-                            <button className="btn_vitri">1A</button>
-                            <button className="btn_vitri">1A</button>
-                            <button className="btn_vitri">1A</button>
+
+                        <div className="col-lg-12 d-flex flex-wrap">
+                            {allGheNgoi &&
+                                allGheNgoi.map((value, index) => (
+                                    <div className="mb-3 col-lg-2" key={value + index}>
+                                        <button
+                                            className="btn_vitri "
+                                            style={value.MaKhachDiChung && { backgroundColor: '#EE4E4E' }}
+                                        >
+                                            {value.TenGhe}
+                                        </button>
+                                    </div>
+                                ))}
                         </div>
                     </div>
                 </div>

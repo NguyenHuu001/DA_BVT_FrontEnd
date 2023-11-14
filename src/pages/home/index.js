@@ -1,3 +1,4 @@
+import './home.scss'
 function Home() {
     return <h1 style={{ height: '100vh' }}>Home</h1>;
 }

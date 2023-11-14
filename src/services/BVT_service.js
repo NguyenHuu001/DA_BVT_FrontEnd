@@ -19,4 +19,8 @@ const searchChuyenTau = (MaChuyenTau, SoLuong, NgayDi) => {
 const getDetailKH = (config) => {
     return instance.get('/api/getDetailKH', config);
 };
-export { RegisterKH, LoginKH, getALLChuyenTau, searchChuyenTau, getDetailKH };
+//Lấy tất cả chỗ ngồi với điều kiện mã chi tiết chuyến tàu
+const getAllChoNgoi = (MaCTCT,  config) => {
+    return instance.get(`/api/getAllChoNgoi/${MaCTCT}`, config);
+};
+export { RegisterKH, LoginKH, getALLChuyenTau, searchChuyenTau, getDetailKH, getAllChoNgoi };

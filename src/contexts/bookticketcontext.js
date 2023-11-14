@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { getDetailKH } from '../services/BVT_service';
-import { getALLChuyenTau, searchChuyenTau } from '../services/BVT_service';
+import { getAllChoNgoi, getALLChuyenTau, searchChuyenTau } from '../services/BVT_service';
 import { message, notification } from 'antd';
 
 export const BookTicketContext = createContext({});
@@ -195,7 +195,19 @@ export const BookTicketProvider = ({ children }) => {
             return updatedList;
         });
     };
-
+    //COMPONENT CHỌN GHẾ NGỒI
+    const [allGheNgoi, setAllGheNgoi] = useState([]);
+    const [chooseGheNgoi, setCHooseGheNgoi] = useState();
+    const fecthAllChuyenTau = async () => {
+        try {
+            await getAllChoNgoi(chooseDetailTau.MaChuyenTau).then((res) => {
+                setAllGheNgoi(res);
+                console.log(res);
+            });
+        } catch (error) {
+            console.log('lỗi khi lấy chuyến tàu');
+        }
+    };
     return (
         <BookTicketContext.Provider
             value={{
@@ -211,6 +223,7 @@ export const BookTicketProvider = ({ children }) => {
                 chooseDetailTau,
                 soLuong,
                 hanhKhachList,
+                allGheNgoi,
                 updateBookingDetails,
                 updateNDV,
                 handleChuyenChange,
@@ -221,6 +234,7 @@ export const BookTicketProvider = ({ children }) => {
                 handleBack,
                 updateChooseTau,
                 handleInputChange,
+                fecthAllChuyenTau,
             }}
         >
             {children}
