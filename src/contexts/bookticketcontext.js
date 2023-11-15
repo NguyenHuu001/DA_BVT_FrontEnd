@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import { getDetailKH } from '../services/BVT_service';
 import { getAllChoNgoi, getALLChuyenTau, searchChuyenTau } from '../services/BVT_service';
 import { message, notification } from 'antd';
@@ -25,6 +25,8 @@ export const BookTicketProvider = ({ children }) => {
     const [email, setEmail] = useState('');
     //hành khách
     const [hanhKhachList, setHanhKhachList] = useState([]);
+    const [DetailListHK, setDetailHKList] = useState([]);
+    const listDetailHK = useRef([]);
     // const [CMNDHK, setCMNDHK] = useState('');
     // const [hoTenHK, setHoTenHK] = useState('');
     // const [EmailHK, setEmaiHK] = useState('');
@@ -34,6 +36,7 @@ export const BookTicketProvider = ({ children }) => {
     // const [quocTichHK, setQuocTichHK] = useState('');
 
     //COMPONENT WRAPBOOKTICKET
+
     useEffect(() => {
         getALLTau();
     }, [detailTau]);
@@ -88,7 +91,24 @@ export const BookTicketProvider = ({ children }) => {
         }
     };
     const handleNext = () => {
-        if (step === 2) checkHK();
+        if (step === 2) {
+            listDetailHK.current = hanhKhachList.map((hanhKhach) => ({
+                ...hanhKhach,
+                MaGhe: '',
+                TenGhe: '',
+            }));
+            listDetailHK.current.push({
+                CMNDHK: '',
+                QuocTichHK: '',
+                HoTenHK: fullName,
+                EmailHK: email,
+                SDTHK: phoneNumber,
+                NgaySinhHK: '',
+                MaGhe: '',
+                TenGhe: '',
+            });
+            setDetailHKList(listDetailHK.current);
+        }
         if (step === 0 && chooseDetailTau.length === 0) {
             notification.open({
                 type: 'error',
@@ -202,12 +222,24 @@ export const BookTicketProvider = ({ children }) => {
         try {
             await getAllChoNgoi(chooseDetailTau.MaChuyenTau).then((res) => {
                 setAllGheNgoi(res);
-                console.log(res);
             });
         } catch (error) {
             console.log('lỗi khi lấy chuyến tàu');
         }
     };
+    //hàm cập nhật khi radio DetailHKList thay đổi
+    const updateDetailHKList = (index, newMaGhe, newTenGhe) => {
+        setDetailHKList((prevList) => {
+            const updatedList = [...prevList];
+            updatedList[index] = {
+                ...updatedList[index],
+                MaGhe: newMaGhe,
+                TenGhe: newTenGhe,
+            };
+            return updatedList;
+        });
+    };
+
     return (
         <BookTicketContext.Provider
             value={{
@@ -224,6 +256,7 @@ export const BookTicketProvider = ({ children }) => {
                 soLuong,
                 hanhKhachList,
                 allGheNgoi,
+                DetailListHK,
                 updateBookingDetails,
                 updateNDV,
                 handleChuyenChange,
@@ -235,6 +268,7 @@ export const BookTicketProvider = ({ children }) => {
                 updateChooseTau,
                 handleInputChange,
                 fecthAllChuyenTau,
+                updateDetailHKList,
             }}
         >
             {children}

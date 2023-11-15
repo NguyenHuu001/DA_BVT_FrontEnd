@@ -1,14 +1,30 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getALLChuyenTau } from '../services/BVT_service';
 import './component.scss';
 import { BookTicketContext } from '../contexts/bookticketcontext';
+import { notification } from 'antd';
 function ChonGheNgoi() {
-    const { allGheNgoi, fecthAllChuyenTau } = useContext(BookTicketContext);
-
+    const { allGheNgoi, DetailListHK, updateDetailHKList, fecthAllChuyenTau } = useContext(BookTicketContext);
+    const [index, setIndex] = useState();
     useEffect(() => {
         fecthAllChuyenTau();
     }, []);
-
+    const handleRadioChange = (value) => {
+        setIndex(value);
+    };
+    const checkChoose = (maGhe) => {
+        return DetailListHK.some((value) => value.MaGhe === maGhe);
+    };
+    const handleGheChange = (maGhe, TenGhe) => {
+        index === undefined
+            ? notification.open({
+                  type: 'error',
+                  message: 'Thất bại',
+                  description: 'Vui lòng chọn hành khách mà bạn muốn đổi, trước khi chọn ghế! ',
+                  duration: 2,
+              })
+            : updateDetailHKList(index, maGhe, TenGhe);
+    };
     return (
         <>
             <div className="container">
@@ -27,17 +43,33 @@ function ChonGheNgoi() {
                                     <th className="col-lg-3 d-flex justify-content-center">Loại vé</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr className="col-lg-12 d-flex justify-content-between align-items-center value_table">
-                                    <td className="col-lg-1">
-                                        <input type="radio" name="checkbtn" />
-                                    </td>
-                                    <td className="col-lg-1 d-flex justify-content-center">1</td>
-                                    <td className="col-lg-5 d-flex justify-content-center">Hữu</td>
-                                    <td className="col-lg-2 d-flex justify-content-center">1A</td>
-                                    <td className="col-lg-3 d-flex justify-content-center">Người lớn</td>
-                                </tr>
-                            </tbody>
+                            {DetailListHK &&
+                                DetailListHK.map((value, index) => (
+                                    <tbody key={value + index}>
+                                        <tr className="col-lg-12 d-flex justify-content-between align-items-center value_table">
+                                            <td className="col-lg-1">
+                                                <input
+                                                    type="radio"
+                                                    name="checkbtn"
+                                                    id={`hanhkhach_id${index}`}
+                                                    onChange={() => handleRadioChange(index)}
+                                                />
+                                            </td>
+                                            <td className="col-lg-1 d-flex justify-content-center">
+                                                <label htmlFor={`hanhkhach_id${index}`}>{index + 1}</label>
+                                            </td>
+                                            <td className="col-lg-5 d-flex justify-content-center">
+                                                <label htmlFor={`hanhkhach_id${index}`}>{value.HoTenHK}</label>
+                                            </td>
+                                            <td className="col-lg-2 d-flex justify-content-center">
+                                                <label htmlFor={`hanhkhach_id${index}`}>{value.TenGhe}</label>
+                                            </td>
+                                            <td className="col-lg-3 d-flex justify-content-center">
+                                                <label htmlFor={`hanhkhach_id${index}`}>Người lớn</label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                ))}
                         </table>
                     </div>
                     <div className="col-lg-6">
@@ -51,7 +83,17 @@ function ChonGheNgoi() {
                                     <div className="mb-3 col-lg-2" key={value + index}>
                                         <button
                                             className="btn_vitri "
-                                            style={value.MaKhachDiChung && { backgroundColor: '#EE4E4E' }}
+                                            style={{
+                                                backgroundColor:
+                                                    (value.MaKhachDiChung && '#EE4E4E') ||
+                                                    (checkChoose(value.MaGhe) ? '#092c7a' : ''),
+                                                color:
+                                                    (value.MaKhachDiChung && '#fff') ||
+                                                    (checkChoose(value.MaGhe) ? '#fff' : ''),
+                                            }}
+                                            onClick={() => {
+                                                handleGheChange(value.MaGhe, value.TenGhe);
+                                            }}
                                         >
                                             {value.TenGhe}
                                         </button>
