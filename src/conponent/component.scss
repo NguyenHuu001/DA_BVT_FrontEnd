@@ -36,3 +36,8 @@
 .cusor_check:hover {
     cursor: pointer;
 }
+.positon_sticky {
+    position: sticky;
+    top: 120px;
+    z-index: 20;
+}
