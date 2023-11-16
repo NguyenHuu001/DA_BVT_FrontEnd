@@ -20,7 +20,11 @@ const getDetailKH = (config) => {
     return instance.get('/api/getDetailKH', config);
 };
 //Lấy tất cả chỗ ngồi với điều kiện mã chi tiết chuyến tàu
-const getAllChoNgoi = (MaCTCT,  config) => {
+const getAllChoNgoi = (MaCTCT, config) => {
     return instance.get(`/api/getAllChoNgoi/${MaCTCT}`, config);
 };
-export { RegisterKH, LoginKH, getALLChuyenTau, searchChuyenTau, getDetailKH, getAllChoNgoi };
+//Lấy giá vé
+const getPriceTicket = (MaChuyenTau, config) => {
+    return instance.get(`/api/searchPriceTicket/?MaChuyenTau=${MaChuyenTau}`, config);
+};
+export { RegisterKH, LoginKH, getALLChuyenTau, searchChuyenTau, getDetailKH, getAllChoNgoi, getPriceTicket };

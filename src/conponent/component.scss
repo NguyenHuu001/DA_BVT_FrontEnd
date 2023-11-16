@@ -41,3 +41,27 @@
     top: 120px;
     z-index: 20;
 }
+.padding {
+    padding: 0 20px;
+}
+.table-container {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Khoảng cách giữa thead và tbody */
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+thead {
+    font-weight: 800;
+    height: 40px;
+    border-bottom: 1px solid #504f4f; /* Dấu gạch chân cho thead */
+}
+tbody {
+    height: 40px;
+    border-bottom: 1px solid #504f4f;
+}

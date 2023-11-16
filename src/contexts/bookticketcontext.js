@@ -7,7 +7,7 @@ export const BookTicketContext = createContext({});
 
 export const BookTicketProvider = ({ children }) => {
     //wrapbooktticket
-    const arr_titile = ['tuyến', 'người đặt vé', 'hành khách', 'chọn ghế ngồi'];
+    const arr_titile = ['tuyến', 'người đặt vé', 'hành khách', 'chọn ghế ngồi', 'Thanh Toán'];
     const [chuyenTau, setChuyenTau] = useState([]);
     const [soLuong, setSoLuong] = useState();
     const [date, setDate] = useState();
@@ -97,42 +97,50 @@ export const BookTicketProvider = ({ children }) => {
                 MaGhe: '',
                 TenGhe: '',
             }));
-            listDetailHK.current.push({
-                CMNDHK: '',
-                QuocTichHK: '',
-                HoTenHK: fullName,
-                EmailHK: email,
-                SDTHK: phoneNumber,
-                NgaySinhHK: '',
-                MaGhe: '',
-                TenGhe: '',
-            });
+            // listDetailHK.current.push({
+            //     CMNDHK: '',
+            //     QuocTichHK: '',
+            //     HoTenHK: fullName,
+            //     EmailHK: email,
+            //     SDTHK: phoneNumber,
+            //     NgaySinhHK: '',
+            //     MaGhe: '',
+            //     TenGhe: '',
+            // });
             setDetailHKList(listDetailHK.current);
         }
+
         if (step === 0 && chooseDetailTau.length === 0) {
             notification.open({
                 type: 'error',
-                message: 'Thất bại',
+                message: '',
                 description: 'Vui lòng chọn tuyến đi',
                 duration: 1,
             });
         } else if (step === 1 && (!fullName || !phoneNumber || !email)) {
             notification.open({
                 type: 'error',
-                message: 'Thất bại',
+                message: '',
                 description: 'Vui lòng nhập đủ thông tin',
                 duration: 1,
             });
         } else if (step === 2 && checkHK() <= soLuong && checkHK() > 0) {
             notification.open({
                 type: 'error',
-                message: 'Thất bại',
+                message: '',
                 description: 'Vui lòng nhập đủ thông tin',
                 duration: 1,
             });
+        } else if (step === 3 &&checkChooseGhe() !== 0) {
+            notification.open({
+                type: 'error',
+                message: '',
+                description: 'Vui lòng chọn ghế',
+                duration: 1,
+            });
         } else {
-            step === 3 ? setTitle(arr_titile[step]) : setTitle(arr_titile[step + 1]);
-            step === 3 ? setStep(step) : setStep(step + 1);
+            step === 4 ? setTitle(arr_titile[step]) : setTitle(arr_titile[step + 1]);
+            step === 4 ? setStep(step) : setStep(step + 1);
         }
     };
     const handleBack = () => {
@@ -217,7 +225,6 @@ export const BookTicketProvider = ({ children }) => {
     };
     //COMPONENT CHỌN GHẾ NGỒI
     const [allGheNgoi, setAllGheNgoi] = useState([]);
-    const [chooseGheNgoi, setCHooseGheNgoi] = useState();
     const fecthAllChuyenTau = async () => {
         try {
             await getAllChoNgoi(chooseDetailTau.MaChuyenTau).then((res) => {
@@ -226,6 +233,16 @@ export const BookTicketProvider = ({ children }) => {
         } catch (error) {
             console.log('lỗi khi lấy chuyến tàu');
         }
+    };
+    //hàm check hành khách đã chọn ghế chưa
+    const checkChooseGhe = () => {
+        var counthk = 0;
+        DetailListHK.map((value) => {
+            if (!value.MaGhe) {
+                counthk++;
+            }
+        });
+        return counthk;
     };
     //hàm cập nhật khi radio DetailHKList thay đổi
     const updateDetailHKList = (index, newMaGhe, newTenGhe) => {

@@ -5,6 +5,7 @@ import '../pages/booktickets/booktickets.scss';
 import { ChonGheNgoi, HanhKhach, HanhTrinhDi, NguoiDatVe } from '../conponent/index.js';
 import { BookTicketContext } from '../contexts/bookticketcontext.js';
 import { useContext } from 'react';
+import ThanhToan from './thanhtoan.js';
 
 function WrapBookTicket() {
     const {
@@ -80,9 +81,10 @@ function WrapBookTicket() {
                     {step === 1 && <NguoiDatVe />}
                     {step === 2 && <HanhKhach />}
                     {step === 3 && <ChonGheNgoi />}
+                    {step === 4 && <ThanhToan />}
 
                     <nav className="navbar btn-toolbar sw-toolbar sw-toolbar-bottom d-flex justify-content-end px-4 pt-5 pb-4">
-                        <div className="btn-group navbar-btn sw-btn-group pull-right" role="group">
+                        <div className="btn-group navbar-btn sw-btn-group pull-right " role="group">
                             <button className="btn btn-default sw-btn-prev default" type="button" onClick={handleBack}>
                                 Trở lại
                             </button>
@@ -90,6 +92,11 @@ function WrapBookTicket() {
                                 Tiếp tục
                             </button>
                         </div>
+                        {step === 4 && (
+                            <button className="btn_thanhtoan ms-5" type="button">
+                                Thanh toán
+                            </button>
+                        )}
                     </nav>
                 </div>
             </div>

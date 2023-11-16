@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getALLChuyenTau } from '../services/BVT_service';
 import './component.scss';
 import { BookTicketContext } from '../contexts/bookticketcontext';
@@ -82,9 +82,9 @@ function ChonGheNgoi() {
                         <div className="col-lg-12 d-flex flex-wrap">
                             {allGheNgoi &&
                                 allGheNgoi.map((value, index) => (
-                                    <>
+                                    <React.Fragment key={value + index}>
                                         {value.MaGhe <= 6 ? (
-                                            <div className="mb-3 col-lg-4" key={value + index}>
+                                            <div className="mb-3 col-lg-4">
                                                 <button
                                                     className="btn_vitri "
                                                     style={{
@@ -103,7 +103,7 @@ function ChonGheNgoi() {
                                                 </button>
                                             </div>
                                         ) : (
-                                            <div className="mb-3 col-lg-3" key={value + index}>
+                                            <div className="mb-3 col-lg-3">
                                                 <button
                                                     className="btn_vitri "
                                                     style={{
@@ -122,7 +122,7 @@ function ChonGheNgoi() {
                                                 </button>
                                             </div>
                                         )}
-                                    </>
+                                    </React.Fragment>
                                 ))}
                         </div>
                     </div>
