@@ -92,11 +92,6 @@ function WrapBookTicket() {
                                 Tiếp tục
                             </button>
                         </div>
-                        {step === 4 && (
-                            <button className="btn_thanhtoan ms-5" type="button">
-                                Thanh toán
-                            </button>
-                        )}
                     </nav>
                 </div>
             </div>

@@ -6,17 +6,28 @@ import cardnoidia from '../assets/imgs/card_noidia.png';
 import cardquocte from '../assets/imgs/card_quocte.jpg';
 import './component.scss';
 import moment from 'moment';
-import { getPriceTicket } from '../services/BVT_service';
+import { getPriceTicket, createBookTicket } from '../services/BVT_service';
 function ThanhToan() {
-    const { soLuong, chooseDetailTau, DetailListHK } = useContext(BookTicketContext);
+    const { soLuong, chooseDetailTau, bookingDetails, DetailListHK } = useContext(BookTicketContext);
     const [price, setPrice] = useState();
     const [totalPrice, setTotalPrice] = useState(0);
+    const [today, setToday] = useState();
     const formatTwoDigits = (number) => {
         return number < 10 ? `0${number}` : `${number}`;
     };
     useEffect(() => {
         Priceticket();
+        getCurrentDate();
     }, []);
+    function getCurrentDate() {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Thêm '0' phía trước nếu tháng chỉ có một chữ số
+        const day = String(currentDate.getDate()).padStart(2, '0'); // Thêm '0' phía trước nếu ngày chỉ có một chữ số
+
+        const formattedDate = `${year}-${month}-${day}`;
+        setToday(formattedDate);
+    }
     const Priceticket = async () => {
         try {
             await getPriceTicket(chooseDetailTau.MaChuyenTau).then((res) => {
@@ -25,6 +36,26 @@ function ThanhToan() {
             });
         } catch (error) {
             console.log('lỗi khi lấy giá vé');
+        }
+    };
+    const handleCreateBookTicket = async () => {
+        try {
+            const dataLSDV = {
+                MaCTCT: chooseDetailTau.MaCTCT,
+                NgayDatVe: today,
+                SoLuongVe: soLuong,
+                TongTien: totalPrice,
+            };
+            const data = { DetailListHK, dataLSDV };
+            console.log(DetailListHK, dataLSDV);
+            const config = {
+                withCredentials: true,
+            };
+            await createBookTicket(data, config).then((res) => {
+                console.log('Thanh cong');
+            });
+        } catch (error) {
+            console.log('lỗi ở phần thanh toán');
         }
     };
     return (
@@ -129,6 +160,7 @@ function ThanhToan() {
                     </div>
                 </div>
             </div>
+
             <div className="container">
                 <div className="title_HTT d-flex align-items-center">
                     <FontAwesomeIcon className="me-1" icon={faCreditCard} size="lg" />
@@ -150,6 +182,11 @@ function ThanhToan() {
                         <img src={cardquocte} alt="a" />
                     </div>
                 </div>
+            </div>
+            <div className="me-5 mt-5 d-flex justify-content-end" onClick={handleCreateBookTicket}>
+                <button className="btn_thanhtoan ms-5" type="button">
+                    Thanh toán
+                </button>
             </div>
         </div>
     );

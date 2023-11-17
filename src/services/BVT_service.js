@@ -27,4 +27,16 @@ const getAllChoNgoi = (MaCTCT, config) => {
 const getPriceTicket = (MaChuyenTau, config) => {
     return instance.get(`/api/searchPriceTicket/?MaChuyenTau=${MaChuyenTau}`, config);
 };
-export { RegisterKH, LoginKH, getALLChuyenTau, searchChuyenTau, getDetailKH, getAllChoNgoi, getPriceTicket };
+const createBookTicket = (data, config) => {
+    return instance.post('/api/createBookTicket', data, config);
+};
+export {
+    RegisterKH,
+    LoginKH,
+    getALLChuyenTau,
+    searchChuyenTau,
+    getDetailKH,
+    getAllChoNgoi,
+    getPriceTicket,
+    createBookTicket,
+};

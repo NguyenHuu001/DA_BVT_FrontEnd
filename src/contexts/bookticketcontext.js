@@ -131,7 +131,7 @@ export const BookTicketProvider = ({ children }) => {
                 description: 'Vui lòng nhập đủ thông tin',
                 duration: 1,
             });
-        } else if (step === 3 &&checkChooseGhe() !== 0) {
+        } else if (step === 3 && checkChooseGhe() !== 0) {
             notification.open({
                 type: 'error',
                 message: '',
@@ -227,7 +227,7 @@ export const BookTicketProvider = ({ children }) => {
     const [allGheNgoi, setAllGheNgoi] = useState([]);
     const fecthAllChuyenTau = async () => {
         try {
-            await getAllChoNgoi(chooseDetailTau.MaChuyenTau).then((res) => {
+            await getAllChoNgoi(chooseDetailTau.MaCTCT).then((res) => {
                 setAllGheNgoi(res);
             });
         } catch (error) {

@@ -27,7 +27,7 @@ function ChonGheNgoi() {
     };
     return (
         <>
-            <div className="ms-3 positon_sticky col-lg-6">
+            <div className="ms-3 positon_sticky col-lg-5">
                 <div className="mt-4">
                     <p className="tilet_luotdi">Lượt đi</p>
                 </div>
@@ -39,13 +39,12 @@ function ChonGheNgoi() {
                                 <th className="col-lg-1 d-flex justify-content-center">STT</th>
                                 <th className="col-lg-5 d-flex justify-content-center">Họ tên</th>
                                 <th className="col-lg-2 d-flex justify-content-center">Ghế đi</th>
-                                <th className="col-lg-3 d-flex justify-content-center">Loại vé</th>
                             </tr>
                         </thead>
                         {DetailListHK &&
                             DetailListHK.map((value, index) => (
                                 <tbody key={value + index}>
-                                    <tr className="col-lg-12 d-flex justify-content-between align-items-center value_table">
+                                    <tr className="d-flex justify-content-between align-items-center value_table">
                                         <td className="col-lg-1">
                                             <input
                                                 type="radio"
@@ -54,18 +53,15 @@ function ChonGheNgoi() {
                                                 onChange={() => handleRadioChange(index)}
                                             />
                                         </td>
-                                        <td className="col-lg-1 d-flex justify-content-center">
-                                            <label htmlFor={`hanhkhach_id${index}`}>{index + 1}</label>
-                                        </td>
-                                        <td className="col-lg-5 d-flex justify-content-center">
-                                            <label htmlFor={`hanhkhach_id${index}`}>{value.HoTenHK}</label>
-                                        </td>
-                                        <td className="col-lg-2 d-flex justify-content-center">
-                                            <label htmlFor={`hanhkhach_id${index}`}>{value.TenGhe}</label>
-                                        </td>
-                                        <td className="col-lg-3 d-flex justify-content-center">
-                                            <label htmlFor={`hanhkhach_id${index}`}>Người lớn</label>
-                                        </td>
+                                        <label className="col-lg-1 hover_chooseGhe " htmlFor={`hanhkhach_id${index}`}>
+                                            <td className="d-flex justify-content-center">{index + 1}</td>
+                                        </label>
+                                        <label className="col-lg-5 hover_chooseGhe " htmlFor={`hanhkhach_id${index}`}>
+                                            <td className="d-flex justify-content-center">{value.HoTenHK}</td>
+                                        </label>
+                                        <label className="col-lg-2 hover_chooseGhe " htmlFor={`hanhkhach_id${index}`}>
+                                            <td className="d-flex justify-content-center">{value.TenGhe}</td>
+                                        </label>
                                     </tr>
                                 </tbody>
                             ))}
@@ -88,6 +84,7 @@ function ChonGheNgoi() {
                                                 <button
                                                     className="btn_vitri "
                                                     style={{
+                                                        cursor: value.MaKhachDiChung && 'no-drop',
                                                         backgroundColor:
                                                             (value.MaKhachDiChung && '#EE4E4E') ||
                                                             (checkChoose(value.MaGhe) ? '#092c7a' : ''),
@@ -96,7 +93,8 @@ function ChonGheNgoi() {
                                                             (checkChoose(value.MaGhe) ? '#fff' : ''),
                                                     }}
                                                     onClick={() => {
-                                                        handleGheChange(value.MaGhe, value.TenGhe);
+                                                        !value.MaKhachDiChung &&
+                                                            handleGheChange(value.MaGhe, value.TenGhe);
                                                     }}
                                                 >
                                                     {value.TenGhe}
@@ -107,6 +105,7 @@ function ChonGheNgoi() {
                                                 <button
                                                     className="btn_vitri "
                                                     style={{
+                                                        cursor: value.MaKhachDiChung && 'no-drop',
                                                         backgroundColor:
                                                             (value.MaKhachDiChung && '#EE4E4E') ||
                                                             (checkChoose(value.MaGhe) ? '#092c7a' : ''),
@@ -115,7 +114,8 @@ function ChonGheNgoi() {
                                                             (checkChoose(value.MaGhe) ? '#fff' : ''),
                                                     }}
                                                     onClick={() => {
-                                                        handleGheChange(value.MaGhe, value.TenGhe);
+                                                        !value.MaKhachDiChung &&
+                                                            handleGheChange(value.MaGhe, value.TenGhe);
                                                     }}
                                                 >
                                                     {value.TenGhe}
