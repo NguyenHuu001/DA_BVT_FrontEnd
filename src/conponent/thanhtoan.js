@@ -7,8 +7,11 @@ import cardquocte from '../assets/imgs/card_quocte.jpg';
 import './component.scss';
 import moment from 'moment';
 import { getPriceTicket, createBookTicket } from '../services/BVT_service';
+import { message, notification } from 'antd';
+import { useNavigate } from 'react-router-dom';
 function ThanhToan() {
-    const { soLuong, chooseDetailTau, bookingDetails, DetailListHK } = useContext(BookTicketContext);
+    const navigate = useNavigate();
+    const { soLuong, chooseDetailTau, DetailListHK, updateStep, updateBookingDetails } = useContext(BookTicketContext);
     const [price, setPrice] = useState();
     const [totalPrice, setTotalPrice] = useState(0);
     const [today, setToday] = useState();
@@ -47,15 +50,22 @@ function ThanhToan() {
                 TongTien: totalPrice,
             };
             const data = { DetailListHK, dataLSDV };
-            console.log(DetailListHK, dataLSDV);
             const config = {
                 withCredentials: true,
             };
             await createBookTicket(data, config).then((res) => {
-                console.log('Thanh cong');
+                setTimeout(() => {
+                    message.success('Đặt vé thành công');
+                }, 50);
+                navigate('/home');
             });
         } catch (error) {
-            console.log('lỗi ở phần thanh toán');
+            notification.open({
+                type: 'error',
+                message: 'Thất bại',
+                description: 'Vui lòng đăng nhập',
+                duration: 2,
+            });
         }
     };
     return (

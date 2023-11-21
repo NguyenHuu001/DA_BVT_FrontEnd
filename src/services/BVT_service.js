@@ -30,6 +30,14 @@ const getPriceTicket = (MaChuyenTau, config) => {
 const createBookTicket = (data, config) => {
     return instance.post('/api/createBookTicket', data, config);
 };
+//Update thông tài khoản
+const updateDetailTK = (data, config) => {
+    return instance.put('/api/updateKhachHang', data, config);
+};
+//Quên mật khẩu
+const forgetPassWord = (Email) => {
+    return instance.post('/api/forgotPassWord', Email);
+};
 export {
     RegisterKH,
     LoginKH,
@@ -39,4 +47,6 @@ export {
     getAllChoNgoi,
     getPriceTicket,
     createBookTicket,
+    updateDetailTK,
+    forgetPassWord,
 };

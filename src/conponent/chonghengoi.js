@@ -45,7 +45,7 @@ function ChonGheNgoi() {
                             DetailListHK.map((value, index) => (
                                 <tbody key={value + index}>
                                     <tr className="d-flex justify-content-between align-items-center value_table">
-                                        <td className="col-lg-1">
+                                        <td className="col-lg-1 d-flex hover_chooseGhe justify-content-center">
                                             <input
                                                 type="radio"
                                                 name="checkbtn"
@@ -53,15 +53,21 @@ function ChonGheNgoi() {
                                                 onChange={() => handleRadioChange(index)}
                                             />
                                         </td>
-                                        <label className="col-lg-1 hover_chooseGhe " htmlFor={`hanhkhach_id${index}`}>
-                                            <td className="d-flex justify-content-center">{index + 1}</td>
-                                        </label>
-                                        <label className="col-lg-5 hover_chooseGhe " htmlFor={`hanhkhach_id${index}`}>
-                                            <td className="d-flex justify-content-center">{value.HoTenHK}</td>
-                                        </label>
-                                        <label className="col-lg-2 hover_chooseGhe " htmlFor={`hanhkhach_id${index}`}>
-                                            <td className="d-flex justify-content-center">{value.TenGhe}</td>
-                                        </label>
+                                        <td className="col-lg-2 hover_chooseGhe d-flex justify-content-center">
+                                            <label htmlFor={`hanhkhach_id${index}`}>
+                                                <div className="d-flex justify-content-center">{index + 1}</div>
+                                            </label>
+                                        </td>
+                                        <td className="col-lg-5 hover_chooseGhe d-flex justify-content-center">
+                                            <label htmlFor={`hanhkhach_id${index}`}>
+                                                <div className="d-flex justify-content-center">{value.HoTenHK}</div>
+                                            </label>
+                                        </td>
+                                        <td className="col-lg-3 hover_chooseGhe d-flex justify-content-center">
+                                            <label htmlFor={`hanhkhach_id${index}`}>
+                                                <div className="d-flex justify-content-center">{value.TenGhe}</div>
+                                            </label>
+                                        </td>
                                     </tr>
                                 </tbody>
                             ))}

@@ -256,7 +256,10 @@ export const BookTicketProvider = ({ children }) => {
             return updatedList;
         });
     };
-
+    //COPONENT THANH TOÁN
+    const updateStep = (value) => {
+        setStep(value);
+    };
     return (
         <BookTicketContext.Provider
             value={{
@@ -286,6 +289,7 @@ export const BookTicketProvider = ({ children }) => {
                 handleInputChange,
                 fecthAllChuyenTau,
                 updateDetailHKList,
+                updateStep,
             }}
         >
             {children}

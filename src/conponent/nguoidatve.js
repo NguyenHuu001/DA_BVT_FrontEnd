@@ -1,8 +1,9 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Form, Input } from 'antd';
+import { Form, Input, message } from 'antd';
 import { useContext, useEffect, useState } from 'react';
 import { BookTicketContext } from '../contexts/bookticketcontext';
+import { updateDetailTK } from '../services/BVT_service';
 function NguoiDatVe() {
     const { fullName, phoneNumber, email, updateNDV } = useContext(BookTicketContext);
     const [hoTen, setHoTen] = useState(fullName);
@@ -15,7 +16,25 @@ function NguoiDatVe() {
     useEffect(() => {
         form.setFieldsValue({ FullName: hoTen, PhoneNumber: sdt, Email: gmail });
     }, [hoTen, sdt, gmail]);
-
+    const capNhatTTTK = async () => {
+        try {
+            const config = {
+                withCredentials: true,
+            };
+            const data = {
+                TenKH: hoTen,
+                SoDienThoai: sdt,
+                Email: email,
+            };
+            await updateDetailTK(data, config).then((res) => {
+                setTimeout(() => {
+                    message.success('Cập nhật thành công');
+                }, 50);
+            });
+        } catch (error) {
+            console.log('lỗi ở lúc cập nhật thông tin tài khoản');
+        }
+    };
     return (
         <div className="step_one">
             <div className="title_HTT d-flex align-items-center">
@@ -110,6 +129,16 @@ function NguoiDatVe() {
                         <Input onBlur={(e) => setGmail(e.target.value)} />
                     </Form.Item>
                 </Form>
+            </div>
+            <div className="d-flex justify-content-end me-4 ">
+                <button className="col-lg-2 btn_update_TK" onClick={capNhatTTTK}>
+                    Cập nhật
+                </button>
+            </div>
+            <div className="d-flex justify-content-end me-4 mt-2">
+                <span style={{ color: 'red' }}>
+                    (*) Vui lòng kiểm tra lại thông tin tài khoản, nếu chưa chính xác xin vui lòng cập nhật lại
+                </span>
             </div>
         </div>
     );

@@ -83,7 +83,7 @@ function Login() {
                 >
                     <Input.Password />
                 </Form.Item>
-                <Link className="ms-5" to="/login" style={{ fontSize: '16px' }}>
+                <Link className="ms-5" to="/forgotpassword" style={{ fontSize: '16px' }}>
                     Quên mật khẩu
                 </Link>
                 <Form.Item

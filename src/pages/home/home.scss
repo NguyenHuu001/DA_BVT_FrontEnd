@@ -1,0 +1,42 @@
+/* Home.scss */
+
+.home-container {
+    position: relative;
+
+    .slick-slider {
+        position: relative;
+        z-index: 1;
+    }
+
+    .wrap-book-ticket {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+    }
+
+    .responsive-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .panel {
+        &.panel-primary {
+            .panel-heading {
+                background-color: #337ab7;
+                color: #fff;
+            }
+        }
+    }
+
+    .schedule-boat,
+    .place-boat {
+        margin-top: 10px;
+
+        .content {
+            text-align: center;
+        }
+    }
+}

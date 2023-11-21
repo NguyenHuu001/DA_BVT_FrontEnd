@@ -68,3 +68,15 @@ tbody {
 .hover_chooseGhe:hover {
     cursor: pointer;
 }
+.btn_update_TK {
+    padding: 10px 20px;
+    background: rgb(187, 195, 27);
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    &:hover{
+        opacity: 0.8;
+    }
+}
