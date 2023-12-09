@@ -25,6 +25,19 @@ function ChonGheNgoi() {
               })
             : updateDetailHKList(index, maGhe, TenGhe);
     };
+    const legendStyle = {
+        clear: 'both',
+        height: '5px',
+        margin: '0',
+        padding: '0',
+    };
+
+    const seatStyles = {
+        width: '50px',
+        height: '25px',
+        float: 'left',
+        margin: '0 5px 0 0',
+    };
     return (
         <>
             <div className="ms-3 positon_sticky col-lg-5">
@@ -72,9 +85,35 @@ function ChonGheNgoi() {
                                 </tbody>
                             ))}
                     </table>
+                    <div className="mt-4">
+                        <h5 style={{ color: 'gray' }}>Ghi chú</h5>
+                        <div id="seatLegend">
+                            <ul>
+                                <li>
+                                    <div style={{ ...seatStyles, backgroundColor: '#d4d4d4' }}></div>
+                                    &nbsp;&nbsp;Ghế trống
+                                </li>
+                            </ul>
+                            <div style={legendStyle}>&nbsp;</div>
+                            <ul>
+                                <li>
+                                    <div style={{ ...seatStyles, backgroundColor: '#092c7a' }}></div>
+                                    &nbsp;&nbsp;Ghế đang chọn
+                                </li>
+                            </ul>
+                            <div style={legendStyle}>&nbsp;</div>
+                            <ul>
+                                <li>
+                                    <div style={{ ...seatStyles, backgroundColor: '#EE4E4E' }}></div>
+                                    &nbsp;&nbsp;Ghế đã được chọn, đã bán
+                                </li>
+                            </ul>
+                            <div style={legendStyle}>&nbsp;</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="container" style={{ position: 'relative', top: '-180px' }}>
+            <div className="container" style={{ position: 'relative', top: '-300px' }}>
                 <div className="d-flex justify-content-end">
                     <div className="col-lg-6">
                         <div className="col-lg-12">

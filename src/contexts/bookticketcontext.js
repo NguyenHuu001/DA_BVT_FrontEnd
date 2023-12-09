@@ -65,8 +65,10 @@ export const BookTicketProvider = ({ children }) => {
     };
     const OnclickSearchTau = async () => {
         try {
-            setChooseDetaiTau([]);
-            if (step !== 0) setStep(0);
+            const nowDate = new Date();
+            const newdate = new Date(date);
+            const nowDateString = nowDate.toISOString().split('T')[0];
+            const newdateString = newdate.toISOString().split('T')[0];
             if (!maChuyenTau || !soLuong || !date) {
                 notification.open({
                     type: 'error',
@@ -75,17 +77,27 @@ export const BookTicketProvider = ({ children }) => {
                     duration: 1,
                 });
                 return null;
+            } else if (newdateString < nowDateString) {
+                notification.open({
+                    type: 'error',
+                    message: 'Thất bại',
+                    description: 'Vui lòng nhập ngày đi bằng hoặc trước ngày hiện tại ',
+                    duration: 2,
+                });
+            } else {
+                setChooseDetaiTau([]);
+                if (step !== 0) setStep(0);
+                await searchChuyenTau(maChuyenTau, soLuong, date).then((res) => {
+                    if (res.length > 0) {
+                        setDetailTau(res);
+                    } else {
+                        setDetailTau(res);
+                        setTimeout(() => {
+                            message.error('Không có chuyến hoặc số lượng ghế không đủ');
+                        }, 50);
+                    }
+                });
             }
-            await searchChuyenTau(maChuyenTau, soLuong, date).then((res) => {
-                if (res.length > 0) {
-                    setDetailTau(res);
-                } else {
-                    setDetailTau(res);
-                    setTimeout(() => {
-                        message.error('Không có chuyến');
-                    }, 50);
-                }
-            });
         } catch (error) {
             console.log('lỗi ở tìm kiếm tàu');
         }
@@ -216,12 +228,17 @@ export const BookTicketProvider = ({ children }) => {
     };
     //hàm cập nhật HanhKhachList khi input thay đổi
     const handleInputChange = (index, fieldName, value) => {
-        setHanhKhachList((prevList) => {
-            const updatedList = [...prevList];
-            const updatedHanhKhach = { ...updatedList[index], [fieldName]: value };
-            updatedList[index] = updatedHanhKhach;
-            return updatedList;
-        });
+        if (fieldName === 'QuocTichHK' && !/^[^\d]+$/u.test(value)) {
+            // Giá trị không hợp lệ, có chứa chữ số
+            return null;
+        } else {
+            setHanhKhachList((prevList) => {
+                const updatedList = [...prevList];
+                const updatedHanhKhach = { ...updatedList[index], [fieldName]: value };
+                updatedList[index] = updatedHanhKhach;
+                return updatedList;
+            });
+        }
     };
     //COMPONENT CHỌN GHẾ NGỒI
     const [allGheNgoi, setAllGheNgoi] = useState([]);

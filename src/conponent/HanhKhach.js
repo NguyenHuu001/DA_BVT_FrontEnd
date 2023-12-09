@@ -236,7 +236,11 @@ function HanhKhach() {
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Vui lòng số Quốc tịch!',
+                                            message: 'Vui lòng nhập Quốc tịch!',
+                                        },
+                                        {
+                                            pattern: /^[\p{L}\s]+$/u,
+                                            message: 'Vui lòng chỉ nhập chữ cái!',
                                         },
                                     ]}
                                 >

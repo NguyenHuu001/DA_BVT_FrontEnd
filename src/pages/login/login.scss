@@ -1,5 +1,17 @@
-.ant-form{
+.ant-form {
     background-color: #fff;
     padding: 40px 0px 20px 0px;
     border-radius: 5px;
+}
+.ant-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #053878;
+    height: 40px;
+    width: 150px;
+    &:where(.css-dev-only-do-not-override-2i2tap).ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+        background-color: #053878;
+        opacity: 0.8;
+    }
 }

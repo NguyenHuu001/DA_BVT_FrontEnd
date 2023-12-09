@@ -42,12 +42,22 @@ function Header() {
                             </div>
                             {fullName ? (
                                 <>
-                                    <Link to="#" style={{ textDecoration: 'none' }}>
-                                        <div className="ms-5 login-logout">
+                                    <div className="login-logout-event" style={{ position: 'relative' }}>
+                                        <div className="ms-5 login-logout ">
                                             <FontAwesomeIcon className="me-2" icon={faUser} />
                                             <span>{fullName}</span>
                                         </div>
-                                    </Link>
+                                        <div className="down_detail ms-5 mt-2">
+                                            <div style={{ width: '100%' }}>
+                                                <Link
+                                                    to="/bookinghistory"
+                                                    style={{ textDecoration: 'none', color: '#053878' }}
+                                                >
+                                                    Lịch sử đặt vé
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="ms-5 login-logout" onClick={logOut}>
                                         <FontAwesomeIcon className="me-2" icon={faRightFromBracket} />
                                         <span>Đăng Xuất</span>

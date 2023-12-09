@@ -38,3 +38,39 @@
         }
     }
 }
+.login-logout-event {
+    &:after {
+        content: '';
+        position: absolute;
+        left: 48px;
+        top: 13px;
+        height: 20px;
+        width: 70%;
+        background-color: transparent;
+    }
+    &:hover > .down_detail {
+        display: block;
+        transition: all linear 0.6s;
+    }
+}
+.down_detail {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 110px;
+    padding: 10px 5px;
+    z-index: 999999;
+}
+.down_detail::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid #fff; /* Màu sắc của mũi nhọn */
+    top: -10px; /* Điều chỉnh vị trí theo ý muốn */
+    left: 15%; /* Điều chỉnh vị trí theo ý muốn */
+    transform: translateX(-50%);
+}

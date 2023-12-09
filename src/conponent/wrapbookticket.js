@@ -46,7 +46,7 @@ function WrapBookTicket() {
                             <FontAwesomeIcon className="me-2" icon={faUserGroup} size="xl" />
                             <InputNumber
                                 min={1}
-                                max={9}
+                                max={200}
                                 defaultValue={0}
                                 onChange={onChangePeople}
                                 style={{ width: '100%' }}

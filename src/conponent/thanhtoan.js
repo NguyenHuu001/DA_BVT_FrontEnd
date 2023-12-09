@@ -11,7 +11,7 @@ import { message, notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
 function ThanhToan() {
     const navigate = useNavigate();
-    const { soLuong, chooseDetailTau, DetailListHK, updateStep, updateBookingDetails } = useContext(BookTicketContext);
+    const { soLuong, chooseDetailTau, DetailListHK } = useContext(BookTicketContext);
     const [price, setPrice] = useState();
     const [totalPrice, setTotalPrice] = useState(0);
     const [today, setToday] = useState();
@@ -19,6 +19,7 @@ function ThanhToan() {
         return number < 10 ? `0${number}` : `${number}`;
     };
     useEffect(() => {
+        
         Priceticket();
         getCurrentDate();
     }, []);
@@ -46,7 +47,6 @@ function ThanhToan() {
             const dataLSDV = {
                 MaCTCT: chooseDetailTau.MaCTCT,
                 NgayDatVe: today,
-                SoLuongVe: soLuong,
                 TongTien: totalPrice,
             };
             const data = { DetailListHK, dataLSDV };

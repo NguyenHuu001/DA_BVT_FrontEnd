@@ -1,7 +1,7 @@
-import { Button, Input, Form, notification } from 'antd'; // Import Form từ antd
+import { Button, Input, Form, notification, Checkbox } from 'antd'; // Import Form từ antd
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { LoginKH } from '../../services/BVT_service';
+import { LoginKH, LoginNV } from '../../services/BVT_service';
 import './login.scss';
 const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -10,30 +10,57 @@ const onFinishFailed = (errorInfo) => {
 function Login() {
     const navigate = useNavigate();
     const onFinish = async (values) => {
-        try {
-            const data = {
-                MatKhau: values.password,
-                TenDangNhap: values.username,
-            };
-            await LoginKH(data).then((res) => {
-                console.log();
-                localStorage.setItem('userName', res.DataKH[0].TenKH);
-                Cookies.set('token', res.token, { expires: 5 });
+        if (values.loginAdmin === true) {
+            try {
+                const data = {
+                    MatKhau: values.password,
+                    TenDangNhap: values.username,
+                };
+                await LoginNV(data).then((res) => {
+                    localStorage.setItem('userName', res.TenDangNhap);
+                    Cookies.set('token', res.token, { expires: 5 });
+                    notification.open({
+                        type: 'success',
+                        message: 'Đăng nhập thành công',
+                        description: '',
+                        duration: 1,
+                    });
+                    navigate('/home');
+                });
+            } catch (error) {
                 notification.open({
-                    type: 'success',
-                    message: 'Đăng nhập thành công',
-                    description: '',
+                    type: 'error',
+                    message: 'Đăng nhập không thành công',
+                    description: 'Tài khoản hoặc mật khẩu không chính xác',
                     duration: 1,
                 });
-                navigate('/home');
-            });
-        } catch (error) {
-            notification.open({
-                type: 'error',
-                message: 'Đăng nhập không thành công',
-                description: 'Tài khoản hoặc mật khẩu không chính xác',
-                duration: 1,
-            });
+            }
+        } else {
+            try {
+                const data = {
+                    MatKhau: values.password,
+                    TenDangNhap: values.username,
+                };
+                await LoginKH(data).then((res) => {
+                    console.log();
+                    localStorage.setItem('userName', res.DataKH[0].TenKH);
+                    Cookies.set('token', res.token, { expires: 5 });
+                    notification.open({
+                        type: 'success',
+                        message: 'Đăng nhập thành công',
+                        description: '',
+                        duration: 1,
+                    });
+                    navigate('/home');
+                });
+            } catch (error) {
+                notification.open({
+                    type: 'error',
+                    message: 'Đăng nhập không thành công',
+                    description: 'Tài khoản hoặc mật khẩu không chính xác',
+                    duration: 1,
+                });
+            }
         }
     };
     return (
@@ -83,9 +110,14 @@ function Login() {
                 >
                     <Input.Password />
                 </Form.Item>
-                <Link className="ms-5" to="/forgotpassword" style={{ fontSize: '16px' }}>
-                    Quên mật khẩu
-                </Link>
+                <div className="d-flex justify-content-around mb-4">
+                    <Link className="ms-5" to="/forgotpassword" style={{ fontSize: '16px' }}>
+                        Quên mật khẩu
+                    </Link>
+                    <Form.Item name="loginAdmin" valuePropName="checked" noStyle>
+                        <Checkbox defaultChecked={false}>Đăng nhập với quyền Admin</Checkbox>
+                    </Form.Item>
+                </div>
                 <Form.Item
                     wrapperCol={{
                         offset: 8,

@@ -1,5 +1,5 @@
 {
-    "homepage": "http://localhost:3009/home",
+    "homepage": "http://localhost:3009/booktickets",
     "name": "da_bvt_frontend",
     "version": "0.1.0",
     "private": true,
