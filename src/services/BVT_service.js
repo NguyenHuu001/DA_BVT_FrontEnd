@@ -24,6 +24,10 @@ const getPriceTicket = (MaChuyenTau, config) => {
 const getHistoryBooking = (config) => {
     return instance.get('/api/getLSDatVe', config);
 };
+//Tìm vé để hủy
+const searchCancelTickets = (MaDatVe, config) => {
+    return instance.get(`/api/searchCancelTickets/${MaDatVe}`, config);
+};
 //Đăng ký
 const RegisterKH = (data) => {
     return instance.post('/api/createAccountKH', data);
@@ -36,6 +40,7 @@ const LoginKH = (data) => {
 const LoginNV = (data) => {
     return instance.post('/api/loginAccountNV', data);
 };
+//Đặt vé
 const createBookTicket = (data, config) => {
     return instance.post('/api/createBookTicket', data, config);
 };
@@ -43,6 +48,11 @@ const createBookTicket = (data, config) => {
 const forgetPassWord = (Email) => {
     return instance.post('/api/forgotPassWord', Email);
 };
+//Yêu cầu hủy vé
+const cancelTickets = (MaDatVe) => {
+    return instance.post(`/api/cancelTickets/${MaDatVe}`);
+};
+
 //Update thông tài khoản
 const updateDetailTK = (data, config) => {
     return instance.put('/api/updateKhachHang', data, config);
@@ -61,4 +71,6 @@ export {
     updateDetailTK,
     forgetPassWord,
     getHistoryBooking,
+    cancelTickets,
+    searchCancelTickets,
 };

@@ -1,34 +1,28 @@
-import './bookinghistory.scss';
-import { cancelTickets, getHistoryBooking } from '../../services/BVT_service';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import moment from 'moment';
-function BookingHistory() {
+import './canceltickets.scss';
+import Search from 'antd/es/input/Search';
+import { searchCancelTickets } from '../../services/BVT_service';
+import { message } from 'antd';
+function CancelTicketsAd() {
     const [historyBooking, setHistoryBooking] = useState([]);
-    useEffect(() => {
-        fetchHistory();
-    }, []);
     const formatTwoDigits = (number) => {
         return number < 10 ? `0${number}` : `${number}`;
     };
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN');
     }
-    const fetchHistory = async () => {
+    const onSearch = async (value) => {
         try {
             const config = {
                 withCredentials: true,
             };
-            await getHistoryBooking(config).then((res) => {
+            await searchCancelTickets(value,config).then((res) => {
                 setHistoryBooking(res);
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    const HuyVe = async (MaDatVe) => {
-        try {
-            await cancelTickets(MaDatVe).then((res) => {
-                fetchHistory();
+                if (res.length === 0)
+                    setTimeout(() => {
+                        message.error('Không có mã vé hoặc mã vé chưa yêu cầu hủy');
+                    }, 50);
             });
         } catch (error) {
             console.log(error);
@@ -36,9 +30,18 @@ function BookingHistory() {
     };
     return (
         <div className="mt-5 d-flex flex-column align-items-center ">
-            <h1 style={{ textTransform: 'uppercase', fontWeight: '600', color: '#fff' }}>Lịch sử đặt vé</h1>
-            <div className="container mt-4 bg-white " style={{ borderRadius: '10px' }}>
-                <div className="table-responsive my-5" style={{ overflowX: 'auto' }}>
+            <h1 style={{ textTransform: 'uppercase', fontWeight: '600', color: '#fff' }}>Hủy vé</h1>
+            <div className="container mt-4 bg-white " style={{ borderRadius: '10px', overflowX: 'auto' }}>
+                <Search
+                    className="mt-4"
+                    placeholder="Nhập mã vé"
+                    onSearch={onSearch}
+                    style={{
+                        width: 200,
+                    }}
+                />
+
+                <div className="table-responsive my-4">
                     <table className="table">
                         <thead>
                             <tr>
@@ -89,34 +92,16 @@ function BookingHistory() {
                                         <td className="no-wrap">{value.TenGhe}</td>
                                         <td className="no-wrap">{formatCurrency(value.GiaVe)} VNĐ</td>
                                         <td className="no-wrap p-0">
-                                            <button
-                                                className="btn-Huy"
-                                                style={{
-                                                    cursor: value.TrangThai !== 'Đã đặt' && 'no-drop',
-                                                    backgroundColor: value.TrangThai !== 'Đã đặt' ? '#757472' : '',
-                                                    color: value.TrangThai !== 'Đã đặt' ? '#fff' : '',
-                                                }}
-                                                onClick={() => {
-                                                    value.TrangThai === 'Đã đặt' && HuyVe(value.MaDatVe);
-                                                }}
-                                            >
-                                                {value.TrangThai === 'Đã đặt' ? 'Hủy' : 'Đang yêu cầu hủy'}
-                                            </button>
+                                            <button className="btn-Huy">Xác nhận hủy vé</button>
                                         </td>
                                     </tr>
                                 ))}
                         </tbody>
                     </table>
                 </div>
-                <div className="d-flex justify-content-end me-4 mt-2 mb-5">
-                    <span style={{ color: 'red' }}>
-                        (*) Khi yêu cầu hủy vé bạn cần liên hệ nơi bán vé và cung cấp "Mã vé tàu" cho nhân viên để xác
-                        nhận hủy{' '}
-                    </span>
-                </div>
             </div>
         </div>
     );
 }
 
-export default BookingHistory;
+export default CancelTicketsAd;

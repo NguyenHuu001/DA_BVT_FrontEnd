@@ -11,7 +11,7 @@ import { message, notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
 function ThanhToan() {
     const navigate = useNavigate();
-    const { soLuong, chooseDetailTau, DetailListHK } = useContext(BookTicketContext);
+    const { soLuong, chooseDetailTau, DetailListHK, fullName, phoneNumber, email } = useContext(BookTicketContext);
     const [price, setPrice] = useState();
     const [totalPrice, setTotalPrice] = useState(0);
     const [today, setToday] = useState();
@@ -19,7 +19,6 @@ function ThanhToan() {
         return number < 10 ? `0${number}` : `${number}`;
     };
     useEffect(() => {
-        
         Priceticket();
         getCurrentDate();
     }, []);
@@ -47,7 +46,7 @@ function ThanhToan() {
             const dataLSDV = {
                 MaCTCT: chooseDetailTau.MaCTCT,
                 NgayDatVe: today,
-                TongTien: totalPrice,
+                GiaVe: price,
             };
             const data = { DetailListHK, dataLSDV };
             const config = {
@@ -79,17 +78,17 @@ function ThanhToan() {
                     <div className="col-lg-6">
                         <div className="d-flex">
                             <p>Họ Tên:</p>
-                            <b className="ms-3">Hữu</b>
+                            <b className="ms-3">{fullName}</b>
                         </div>
                         <div className="d-flex">
                             <p>Email:</p>
-                            <b className="ms-3">emai@gmail.com</b>
+                            <b className="ms-3">{email}</b>
                         </div>
                     </div>
                     <div className="col-lg-6">
                         <div className="d-flex">
                             <p>Điện thoại:</p>
-                            <b className="ms-3">0987654321</b>
+                            <b className="ms-3">{phoneNumber}</b>
                         </div>
                         <div className="d-flex">
                             <p>Thời gian giữ chỗ:</p>

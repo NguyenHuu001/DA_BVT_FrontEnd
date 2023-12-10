@@ -11,6 +11,7 @@ import { notification } from 'antd';
 function Header() {
     const navigate = useNavigate();
     const fullName = localStorage.getItem('userName');
+    const Role = localStorage.getItem('Role');
     const [token, setToken] = useState();
     useEffect(() => {}, [token]);
 
@@ -49,12 +50,21 @@ function Header() {
                                         </div>
                                         <div className="down_detail ms-5 mt-2">
                                             <div style={{ width: '100%' }}>
-                                                <Link
-                                                    to="/bookinghistory"
-                                                    style={{ textDecoration: 'none', color: '#053878' }}
-                                                >
-                                                    Lịch sử đặt vé
-                                                </Link>
+                                                {Role !== 'NhanVien' ? (
+                                                    <Link
+                                                        to="/bookinghistory"
+                                                        style={{ textDecoration: 'none', color: '#053878' }}
+                                                    >
+                                                        Lịch sử đặt vé
+                                                    </Link>
+                                                ) : (
+                                                    <Link
+                                                        to="/cancelticketsad"
+                                                        style={{ textDecoration: 'none', color: '#053878' }}
+                                                    >
+                                                        Xem yêu cầu hủy vé
+                                                    </Link>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

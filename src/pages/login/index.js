@@ -18,6 +18,7 @@ function Login() {
                 };
                 await LoginNV(data).then((res) => {
                     localStorage.setItem('userName', res.TenDangNhap);
+                    localStorage.setItem('Role', res.Quyen);
                     Cookies.set('token', res.token, { expires: 5 });
                     notification.open({
                         type: 'success',
