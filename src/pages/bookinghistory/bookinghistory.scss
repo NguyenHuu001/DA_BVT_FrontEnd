@@ -8,3 +8,9 @@
     color: #fff;
     border-radius: 3px;
 }
+.ant-modal-footer {
+    display: flex;
+}
+:where(.css-dev-only-do-not-override-2i2tap).ant-modal-root .ant-modal-mask {
+    background-color: transparent;
+}

@@ -49,8 +49,8 @@ const forgetPassWord = (Email) => {
     return instance.post('/api/forgotPassWord', Email);
 };
 //Yêu cầu hủy vé
-const cancelTickets = (MaDatVe) => {
-    return instance.post(`/api/cancelTickets/${MaDatVe}`);
+const cancelTickets = (data) => {
+    return instance.post(`/api/cancelTickets`, data);
 };
 
 //Update thông tài khoản

@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import moment from 'moment';
+import {  useState } from 'react';
 import './canceltickets.scss';
 import Search from 'antd/es/input/Search';
 import { searchCancelTickets } from '../../services/BVT_service';
 import { message } from 'antd';
 function CancelTicketsAd() {
     const [historyBooking, setHistoryBooking] = useState([]);
+    
     const formatTwoDigits = (number) => {
         return number < 10 ? `0${number}` : `${number}`;
     };
@@ -17,7 +17,8 @@ function CancelTicketsAd() {
             const config = {
                 withCredentials: true,
             };
-            await searchCancelTickets(value,config).then((res) => {
+            await searchCancelTickets(value, config).then((res) => {
+                console.log(res);
                 setHistoryBooking(res);
                 if (res.length === 0)
                     setTimeout(() => {
@@ -51,7 +52,7 @@ function CancelTicketsAd() {
                                 <th scope="col" className="no-wrap">
                                     Tên Chuyến
                                 </th>
-                                <th scope="col" className="no-wrap">
+                                {/* <th scope="col" className="no-wrap">
                                     Ngày Đi
                                 </th>
                                 <th scope="col" className="no-wrap">
@@ -59,17 +60,23 @@ function CancelTicketsAd() {
                                 </th>
                                 <th scope="col" className="no-wrap">
                                     Ngày Đặt Vé
-                                </th>
+                                </th> */}
 
                                 <th scope="col" className="no-wrap">
-                                    Họ Tên Khách
+                                    Tên Tài Khoản
                                 </th>
                                 <th scope="col" className="no-wrap">
+                                    Số Tài Khoản
+                                </th>
+                                <th scope="col" className="no-wrap">
+                                    Tên Ngân Hàng
+                                </th>
+                                {/* <th scope="col" className="no-wrap">
                                     Trạng thái
                                 </th>
                                 <th scope="col" className="no-wrap">
                                     Số Ghế
-                                </th>
+                                </th> */}
                                 <th scope="col" className="no-wrap">
                                     Giá vé
                                 </th>
@@ -82,14 +89,17 @@ function CancelTicketsAd() {
                                     <tr key={value.HoTenKhachDiChung + index}>
                                         <td className="no-wrap">{value.MaDatVe}</td>
                                         <td className="no-wrap">{value.TenChuyen}</td>
-                                        <td className="no-wrap">{moment(value.NgayDi).format('DD/MM/YYYY')}</td>
+                                        <td className="no-wrap">{value.TenTaiKhoan}</td>
+                                        <td className="no-wrap">{value.SoTaiKhoan}</td>
+                                        <td className="no-wrap">{value.TenNganHang}</td>
+                                        {/* <td className="no-wrap">{moment(value.NgayDi).format('DD/MM/YYYY')}</td>
                                         <td className="no-wrap">{`${formatTwoDigits(
                                             new Date(value.GioDi).getUTCHours(),
                                         )}:${formatTwoDigits(new Date(value.GioDi).getUTCMinutes())}`}</td>
                                         <td className="no-wrap">{moment(value.NgayDatVe).format('DD/MM/YYYY')}</td>
-                                        <td className="no-wrap">{value.HoTenKhachDiChung}</td>
-                                        <td className="no-wrap">{value.TrangThai}</td>
-                                        <td className="no-wrap">{value.TenGhe}</td>
+                                        <td className="no-wrap">{value.HoTenKhachDiChung}</td> */}
+                                        {/* <td className="no-wrap">{value.TrangThai}</td> */}
+                                        {/* <td className="no-wrap">{value.TenGhe}</td> */}
                                         <td className="no-wrap">{formatCurrency(value.GiaVe)} VNĐ</td>
                                         <td className="no-wrap p-0">
                                             <button className="btn-Huy">Xác nhận hủy vé</button>
