@@ -28,6 +28,10 @@ const getHistoryBooking = (config) => {
 const searchCancelTickets = (MaDatVe, config) => {
     return instance.get(`/api/searchCancelTickets/${MaDatVe}`, config);
 };
+//Lấy tất cả thông tin của bảng hủy vé
+const getAllCancelTicket = (config) => {
+    return instance.get(`/api/getAllCancelTickets`, config);
+};
 //Đăng ký
 const RegisterKH = (data) => {
     return instance.post('/api/createAccountKH', data);
@@ -52,7 +56,10 @@ const forgetPassWord = (Email) => {
 const cancelTickets = (data) => {
     return instance.post(`/api/cancelTickets`, data);
 };
-
+//Xác nhận hủy vé
+const confimCancelTicket = (data, config) => {
+    return instance.post(`/api/confimCancelTicket`, data, config);
+};
 //Update thông tài khoản
 const updateDetailTK = (data, config) => {
     return instance.put('/api/updateKhachHang', data, config);
@@ -73,4 +80,6 @@ export {
     getHistoryBooking,
     cancelTickets,
     searchCancelTickets,
+    getAllCancelTicket,
+    confimCancelTicket,
 };

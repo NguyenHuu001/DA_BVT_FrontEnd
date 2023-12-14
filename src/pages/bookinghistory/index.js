@@ -33,7 +33,6 @@ function BookingHistory() {
     const handleOk = () => {
         if (tenTaiKhoan && soTaiKhoan && tenNganHang) {
             try {
-                console.log(maDatVe);
                 HuyVe(maDatVe);
             } catch (error) {
                 console.log(error);

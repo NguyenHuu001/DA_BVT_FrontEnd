@@ -1,13 +1,25 @@
-import {  useState } from 'react';
+import { useEffect, useState } from 'react';
 import './canceltickets.scss';
 import Search from 'antd/es/input/Search';
-import { searchCancelTickets } from '../../services/BVT_service';
+import { confimCancelTicket, getAllCancelTicket, searchCancelTickets } from '../../services/BVT_service';
 import { message } from 'antd';
 function CancelTicketsAd() {
     const [historyBooking, setHistoryBooking] = useState([]);
-    
+    useEffect(() => {
+        fetchHistory();
+    }, []);
     const formatTwoDigits = (number) => {
         return number < 10 ? `0${number}` : `${number}`;
+    };
+    const fetchHistory = async () => {
+        try {
+            const config = {
+                withCredentials: true,
+            };
+            await getAllCancelTicket(config).then((res) => {
+                setHistoryBooking(res);
+            });
+        } catch (error) {}
     };
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN');
@@ -18,12 +30,29 @@ function CancelTicketsAd() {
                 withCredentials: true,
             };
             await searchCancelTickets(value, config).then((res) => {
-                console.log(res);
                 setHistoryBooking(res);
                 if (res.length === 0)
                     setTimeout(() => {
                         message.error('Không có mã vé hoặc mã vé chưa yêu cầu hủy');
                     }, 50);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const XacNhanHuyVe = async (MaHuyVe, MaCTCT, MaDatVe, MaKhachDiChung) => {
+        try {
+            const data = {
+                MaHuyVe: MaHuyVe,
+                MaCTCT: MaCTCT,
+                MaKhachDiChung: MaKhachDiChung,
+                MaDatVe: MaDatVe,
+            };
+            const config = {
+                withCredentials: true,
+            };
+            await confimCancelTicket(data, config).then((res) => {
+                fetchHistory();
             });
         } catch (error) {
             console.log(error);
@@ -78,7 +107,7 @@ function CancelTicketsAd() {
                                     Số Ghế
                                 </th> */}
                                 <th scope="col" className="no-wrap">
-                                    Giá vé
+                                    Giá vé sau khi trừ phí
                                 </th>
                                 <th scope="col" className="no-wrap"></th>
                             </tr>
@@ -92,23 +121,27 @@ function CancelTicketsAd() {
                                         <td className="no-wrap">{value.TenTaiKhoan}</td>
                                         <td className="no-wrap">{value.SoTaiKhoan}</td>
                                         <td className="no-wrap">{value.TenNganHang}</td>
-                                        {/* <td className="no-wrap">{moment(value.NgayDi).format('DD/MM/YYYY')}</td>
-                                        <td className="no-wrap">{`${formatTwoDigits(
-                                            new Date(value.GioDi).getUTCHours(),
-                                        )}:${formatTwoDigits(new Date(value.GioDi).getUTCMinutes())}`}</td>
-                                        <td className="no-wrap">{moment(value.NgayDatVe).format('DD/MM/YYYY')}</td>
-                                        <td className="no-wrap">{value.HoTenKhachDiChung}</td> */}
-                                        {/* <td className="no-wrap">{value.TrangThai}</td> */}
-                                        {/* <td className="no-wrap">{value.TenGhe}</td> */}
-                                        <td className="no-wrap">{formatCurrency(value.GiaVe)} VNĐ</td>
+                                        <td className="no-wrap">{formatCurrency(value.GiaVe * 0.8)} VNĐ</td>
                                         <td className="no-wrap p-0">
-                                            <button className="btn-Huy">Xác nhận hủy vé</button>
+                                            <button
+                                                className="btn-Huy"
+                                                onClick={() => {
+                                                    XacNhanHuyVe(
+                                                        value.MaHuyVe,
+                                                        value.MaCTCT,
+                                                        value.MaDatVe,
+                                                        value.MaKhachDiChung,
+                                                    );
+                                                }}
+                                            >
+                                                Xác nhận hủy vé
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
                         </tbody>
                     </table>
-                </div>
+                </div>``
             </div>
         </div>
     );
