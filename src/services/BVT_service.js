@@ -32,6 +32,10 @@ const searchCancelTickets = (MaDatVe, config) => {
 const getAllCancelTicket = (config) => {
     return instance.get(`/api/getAllCancelTickets`, config);
 };
+//Lấy tổng thu nhập tháng hiện tại
+const totalMonthlyIncome = (config) => {
+    return instance.get(`/api/tongTienThang`, config);
+};
 //Đăng ký
 const RegisterKH = (data) => {
     return instance.post('/api/createAccountKH', data);
@@ -81,5 +85,5 @@ export {
     cancelTickets,
     searchCancelTickets,
     getAllCancelTicket,
-    confimCancelTicket,
+    confimCancelTicket,totalMonthlyIncome
 };

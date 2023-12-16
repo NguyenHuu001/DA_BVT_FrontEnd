@@ -27,13 +27,6 @@ export const BookTicketProvider = ({ children }) => {
     const [hanhKhachList, setHanhKhachList] = useState([]);
     const [DetailListHK, setDetailHKList] = useState([]);
     const listDetailHK = useRef([]);
-    // const [CMNDHK, setCMNDHK] = useState('');
-    // const [hoTenHK, setHoTenHK] = useState('');
-    // const [EmailHK, setEmaiHK] = useState('');
-    // const [NoiSinhHK, setNoiSinhHK] = useState('');
-    // const [ngaysinhHK, setNgaySinhHK] = useState('');
-    // const [SDTHK, setSDTHK] = useState('');
-    // const [quocTichHK, setQuocTichHK] = useState('');
 
     //COMPONENT WRAPBOOKTICKET
 

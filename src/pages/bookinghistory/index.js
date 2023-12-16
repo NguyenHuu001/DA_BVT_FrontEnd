@@ -56,7 +56,7 @@ function BookingHistory() {
     };
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN');
-    }
+    }   
     const fetchHistory = async () => {
         try {
             const config = {

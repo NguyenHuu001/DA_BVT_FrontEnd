@@ -8,9 +8,6 @@ function CancelTicketsAd() {
     useEffect(() => {
         fetchHistory();
     }, []);
-    const formatTwoDigits = (number) => {
-        return number < 10 ? `0${number}` : `${number}`;
-    };
     const fetchHistory = async () => {
         try {
             const config = {
@@ -70,7 +67,6 @@ function CancelTicketsAd() {
                         width: 200,
                     }}
                 />
-
                 <div className="table-responsive my-4">
                     <table className="table">
                         <thead>
@@ -141,7 +137,7 @@ function CancelTicketsAd() {
                                 ))}
                         </tbody>
                     </table>
-                </div>``
+                </div>
             </div>
         </div>
     );

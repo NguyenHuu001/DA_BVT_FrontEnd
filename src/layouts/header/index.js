@@ -58,12 +58,25 @@ function Header() {
                                                         Lịch sử đặt vé
                                                     </Link>
                                                 ) : (
-                                                    <Link
-                                                        to="/cancelticketsad"
-                                                        style={{ textDecoration: 'none', color: '#053878' }}
-                                                    >
-                                                        Xem yêu cầu hủy vé
-                                                    </Link>
+                                                    <>
+                                                        <div>
+                                                            <Link
+                                                                to="/cancelticketsad"
+                                                                style={{ textDecoration: 'none', color: '#053878' }}
+                                                            >
+                                                                Xem yêu cầu hủy vé
+                                                            </Link>
+                                                        </div>
+                                                        <hr />
+                                                        <div className="mt-2">
+                                                            <Link
+                                                                to="/statistic"
+                                                                style={{ textDecoration: 'none', color: '#053878' }}
+                                                            >
+                                                                Báo cáo thống kê
+                                                            </Link>
+                                                        </div>
+                                                    </>
                                                 )}
                                             </div>
                                         </div>
