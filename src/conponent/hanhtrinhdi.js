@@ -16,7 +16,7 @@ function HanhTrinhDi(detailTau) {
         updateChooseTau(value);
     };
     return (
-        <div className="step_one">
+        <div className="step_one" style={{ overflowX: 'auto' }}>
             <div className="title_HTT d-flex align-items-center">
                 <FontAwesomeIcon className="me-1" icon={faLocationDot} size="lg" />
                 <h5 className="mb-0">Hành trình đi</h5>

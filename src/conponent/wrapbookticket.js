@@ -27,8 +27,8 @@ function WrapBookTicket() {
                 <div className="p-4">
                     <h5 style={{ textTransform: 'uppercase', color: '#757575' }}>Tìm tuyến</h5>
                     <hr />
-                    <div className="d-flex">
-                        <div className="col-lg-3 d-flex align-items-center me-3">
+                    <div className="d-flex flex-wrap">
+                        <div className="col-lg-3 col-xs-12 mb-2  d-flex align-items-center me-3 ">
                             <FontAwesomeIcon className="me-2" icon={faTrain} size="xl" />
                             <Select
                                 placeholder="Tuyến"
@@ -42,7 +42,7 @@ function WrapBookTicket() {
                                     ))}
                             </Select>
                         </div>
-                        <div className="col-lg-2 d-flex align-items-center me-3">
+                        <div className="col-lg-2 col-xs-12 mb-2  d-flex align-items-center me-3">
                             <FontAwesomeIcon className="me-2" icon={faUserGroup} size="xl" />
                             <InputNumber
                                 min={1}
@@ -52,11 +52,11 @@ function WrapBookTicket() {
                                 style={{ width: '100%' }}
                             />
                         </div>
-                        <div className="col-lg-3 d-flex align-items-center">
+                        <div className="col-lg-3 col-xs-12 mb-2  d-flex align-items-center">
                             <FontAwesomeIcon className="me-2" icon={faCalendarDays} size="xl" />
                             <DatePicker onChange={onChangeDate} />
                         </div>
-                        <div className="col-lg-3 d-flex justify-content-end" onClick={OnclickSearchTau}>
+                        <div className="col-lg-3 col-xs-12 mb-2  d-flex justify-content-end" onClick={OnclickSearchTau}>
                             <button className="btn_searchTrain">
                                 <FontAwesomeIcon
                                     className="me-2"

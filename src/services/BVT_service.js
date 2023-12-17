@@ -36,6 +36,14 @@ const getAllCancelTicket = (config) => {
 const totalMonthlyIncome = (config) => {
     return instance.get(`/api/tongTienThang`, config);
 };
+//Lấy số lượng vé bán và vé hủy
+const getSale_Cancel_Ticket = (config) => {
+    return instance.get('api/thongKeVeBan_Huy', config);
+};
+//Thống kê số lượng vé của từng chuyến bán ra trong tháng
+const getSaleTicketTrain = (config) => {
+    return instance.get('api/saleTicketTrain', config);
+};
 //Đăng ký
 const RegisterKH = (data) => {
     return instance.post('/api/createAccountKH', data);
@@ -85,5 +93,8 @@ export {
     cancelTickets,
     searchCancelTickets,
     getAllCancelTicket,
-    confimCancelTicket,totalMonthlyIncome
+    confimCancelTicket,
+    totalMonthlyIncome,
+    getSale_Cancel_Ticket,
+    getSaleTicketTrain,
 };
