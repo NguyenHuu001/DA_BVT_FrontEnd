@@ -10,7 +10,10 @@ import slider4 from '../../assets/imgs/slider4.jpg';
 import slider5 from '../../assets/imgs/slider5.jpg';
 import ScheduleBoatImage from '../../assets/imgs/ScheduleBoat5.jpg';
 import ConDaoImage from '../../assets/imgs/con-dao.jpg';
-
+import './home.scss';
+import { InputNumber, Select } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 const CustomPrevArrow = (props) => (
     <div {...props} style={{ ...props.style, left: '10px', zIndex: 1 }}>
         <button>Prev</button>
@@ -25,7 +28,7 @@ const CustomNextArrow = (props) => (
 
 const Home = () => {
     const sliderSettings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
@@ -36,43 +39,56 @@ const Home = () => {
 
     return (
         <div className="home-container">
+            <style>
+                {`
+          .slick-slide {
+            transition: height 0.5s;
+            overflow: hidden;
+          }
+          .slick-slide img {
+            width: 100%;
+          }
+        `}
+            </style>
             <Slider {...sliderSettings}>
-                <div className="">
-                    <img src={slider2} style={{ width: '100%' }} alt="Slider 2" />
+                <div className="p-4">
+                    <img src={slider2} alt="Slider 2" />
                 </div>
-                <div className="">
-                    <img src={img7} style={{ width: '100%' }} alt="7" />
+                <div className="p-4">
+                    <img src={img7} alt="7" />
                 </div>
-                <div className="">
-                    <img src={slider3} style={{ width: '100%' }} alt="Slider 3" />
+                <div className="p-4">
+                    <img src={slider3} alt="Slider 3" />
                 </div>
-                <div className="">
-                    <img src={slider4} style={{ width: '100%' }} alt="Slider 4" />
+                <div className="p-4">
+                    <img src={slider4} alt="Slider 4" />
                 </div>
-                <div className="">
-                    <img src={slider5} style={{ width: '100%' }} alt="Slider 5" />
+                <div className="p-4">
+                    <img src={slider5} alt="Slider 5" />
                 </div>
             </Slider>
-            <WrapBookTicket hideNavbar className="wrap-book-ticket" />
+
             <div className="row m-t-10">
                 <div className="col-sm-6">
                     <div className="panel panel-primary schedule-boat">
                         <div className="panel-heading">
-                            <h3 className="panel-title text-center">LỊCH TÀU CHẠY</h3>
+                            <h3 className="panel-title text-center" style={{ fontFamily: 'Roboto', color: '#FFFF00' }}>
+                                TỐC HÀNH
+                            </h3>
                         </div>
-                        <div className="content">
-                            <a href="/Home/ScheduleBoat">
-                                <img src={ScheduleBoatImage} style={{ width: '100%' }} alt="Schedule Boat" />
-                            </a>
+                        <div className="content" style={{ backgroundColor: '#fff' }}>
+                            <img src={ScheduleBoatImage} style={{ width: '100%' }} alt="Schedule Boat" />
                         </div>
                     </div>
                 </div>
                 <div className="col-sm-6">
                     <div className="panel panel-primary place-boat">
                         <div className="panel-heading">
-                            <h3 className="panel-title text-center">ĐIỂM ĐẾN</h3>
+                            <h3 className="panel-title text-center" style={{ fontFamily: 'Roboto', color: '#FFFF00' }}>
+                                SANG TRỌNG
+                            </h3>
                         </div>
-                        <div className="content">
+                        <div className="content" style={{ backgroundColor: '#fff' }}>
                             <img src={ConDaoImage} style={{ width: '100%' }} alt="Con Dao" />
                         </div>
                     </div>

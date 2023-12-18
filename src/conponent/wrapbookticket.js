@@ -7,7 +7,7 @@ import { BookTicketContext } from '../contexts/bookticketcontext.js';
 import { useContext } from 'react';
 import ThanhToan from './thanhtoan.js';
 
-function WrapBookTicket() {
+function WrapBookTicket(hideNavbar) {
     const {
         tenChuyenTau,
         handleChuyenChange,
@@ -22,7 +22,7 @@ function WrapBookTicket() {
         detailTau,
     } = useContext(BookTicketContext);
     return (
-        <div className="container">
+        <div className={`container mt-5 p-0 ${hideNavbar ? 'hide-navbar' : ''}`}>
             <div className="bg-white">
                 <div className="p-4">
                     <h5 style={{ textTransform: 'uppercase', color: '#757575' }}>Tìm tuyến</h5>
@@ -73,9 +73,11 @@ function WrapBookTicket() {
 
             <div className="container mt-5  p-0">
                 <div className="bg-white">
-                    <div className="title d-flex justify-content-center align-items-center">
-                        <h3 className="mb-0">{title}</h3>
-                    </div>
+                    {!hideNavbar && (
+                        <div className="title d-flex justify-content-center align-items-center">
+                            <h3 className="mb-0">{title}</h3>
+                        </div>
+                    )}
 
                     {step === 0 && <HanhTrinhDi value={detailTau} />}
                     {step === 1 && <NguoiDatVe />}

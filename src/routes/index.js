@@ -7,6 +7,8 @@ import BookingHistory from '../pages/bookinghistory';
 import CancelTicketsAd from '../pages/cancelticketsad';
 import Statistic from '../pages/statistic';
 import Contact from '../pages/contact';
+import KhachHang from '../pages/khachhang/khachHang';
+import ActionKhachHang from '../pages/khachhang/khachHangAction';
 const publicRoutes = [
     { path: '/home', component: Home },
     { path: '/booktickets', component: BookTickets },
@@ -17,6 +19,8 @@ const publicRoutes = [
     { path: '/cancelticketsad', component: CancelTicketsAd },
     { path: '/statistic', component: Statistic },
     { path: '/contact', component: Contact },
+    { path: '/khach-hang', component: KhachHang },
+    { path: '/khach-hang/:id', component: ActionKhachHang },
 ];
 
 const privateRoutes = [];

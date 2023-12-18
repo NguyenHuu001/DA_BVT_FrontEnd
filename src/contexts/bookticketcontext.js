@@ -57,20 +57,22 @@ export const BookTicketProvider = ({ children }) => {
         setMaChuyenTau(parseInt(option.key) + 1);
     };
     const OnclickSearchTau = async () => {
+        if (!maChuyenTau || !soLuong || !date) {
+            notification.open({
+                type: 'error',
+                message: 'Thất bại',
+                description: 'Vui lòng nhập đầy đủ thông tin',
+                duration: 1,
+            });
+            return null;
+        }
         try {
             const nowDate = new Date();
             const newdate = new Date(date);
             const nowDateString = nowDate.toISOString().split('T')[0];
             const newdateString = newdate.toISOString().split('T')[0];
-            if (!maChuyenTau || !soLuong || !date) {
-                notification.open({
-                    type: 'error',
-                    message: 'Thất bại',
-                    description: 'Vui lòng nhập đầy đủ thông tin',
-                    duration: 1,
-                });
-                return null;
-            } else if (newdateString < nowDateString) {
+
+            if (newdateString < nowDateString) {
                 notification.open({
                     type: 'error',
                     message: 'Thất bại',

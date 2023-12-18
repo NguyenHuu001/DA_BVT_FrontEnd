@@ -85,6 +85,15 @@ function Header() {
                                                         <hr />
                                                         <div className="mt-2">
                                                             <Link
+                                                                to="/khach-hang"
+                                                                style={{ textDecoration: 'none', color: '#053878' }}
+                                                            >
+                                                                Danh sách khách hàng
+                                                            </Link>
+                                                        </div>
+                                                        <hr />
+                                                        <div className="mt-2">
+                                                            <Link
                                                                 to="/statistic"
                                                                 style={{ textDecoration: 'none', color: '#053878' }}
                                                             >

@@ -76,7 +76,24 @@ const confimCancelTicket = (data, config) => {
 const updateDetailTK = (data, config) => {
     return instance.put('/api/updateKhachHang', data, config);
 };
+//Thêm
+const getAllKhachHang = () => {
+    return instance.get(`/api/all-khach-hang`);
+};
 
+const updateKhachHangByAdmin = (data) => {
+    return instance.put(`/api/update`, data);
+};
+
+const deleteKhachHang = (id) => {
+    return instance.delete(`/api/delete/${id}`);
+};
+
+const getKhachHangById = (id) => {
+    console.log(id);
+
+    return instance.get(`/api/khach-hang/${id}`);
+};
 export {
     RegisterKH,
     LoginKH,
@@ -97,4 +114,8 @@ export {
     totalMonthlyIncome,
     getSale_Cancel_Ticket,
     getSaleTicketTrain,
+    getAllKhachHang,
+    updateKhachHangByAdmin,
+    deleteKhachHang,
+    getKhachHangById,
 };
