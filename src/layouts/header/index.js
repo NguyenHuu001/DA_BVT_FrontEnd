@@ -146,7 +146,7 @@ function Header() {
                                 <span className="nav_items">Đặt vé</span>
                             </div>
                         </Link>
-                        <Link to="#" style={{ textDecoration: 'none' }}>
+                        <Link to="/contact" style={{ textDecoration: 'none' }}>
                             <div className="ms-4 col-xs-12">
                                 <span className="nav_items">Liên hệ</span>
                             </div>

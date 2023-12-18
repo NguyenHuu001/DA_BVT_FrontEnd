@@ -6,6 +6,7 @@ import ForgotPassWord from '../pages/forgotpassword';
 import BookingHistory from '../pages/bookinghistory';
 import CancelTicketsAd from '../pages/cancelticketsad';
 import Statistic from '../pages/statistic';
+import Contact from '../pages/contact';
 const publicRoutes = [
     { path: '/home', component: Home },
     { path: '/booktickets', component: BookTickets },
@@ -15,6 +16,7 @@ const publicRoutes = [
     { path: '/bookinghistory', component: BookingHistory },
     { path: '/cancelticketsad', component: CancelTicketsAd },
     { path: '/statistic', component: Statistic },
+    { path: '/contact', component: Contact },
 ];
 
 const privateRoutes = [];
