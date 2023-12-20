@@ -6,7 +6,10 @@ import { Link } from 'react-router-dom';
 import { getAllKhachHang, deleteKhachHang } from '../../services/BVT_service';
 import dayjs from 'dayjs';
 const KhachHang = () => {
-    const { data: khachhang } = useAsync(() => getAllKhachHang());
+    const config = {
+        withCredentials: true,
+    };
+    const { data: khachhang } = useAsync(() => getAllKhachHang(config));
 
     let dataSource = [];
     khachhang.map((item, i) => {
@@ -85,7 +88,10 @@ const KhachHang = () => {
         },
     ];
     const confirm = async (id) => {
-        const res = await deleteKhachHang(id);
+        const config = {
+            withCredentials: true,
+        };
+        const res = await deleteKhachHang(id, config);
         if (res.message === 'Xóa khách hàng thành công!') {
             notification.open({
                 type: 'success',

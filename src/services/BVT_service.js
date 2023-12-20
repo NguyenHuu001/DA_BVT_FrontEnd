@@ -77,22 +77,22 @@ const updateDetailTK = (data, config) => {
     return instance.put('/api/updateKhachHang', data, config);
 };
 //Thêm
-const getAllKhachHang = () => {
-    return instance.get(`/api/all-khach-hang`);
+const getAllKhachHang = (config) => {
+    return instance.get(`/api/all-khach-hang`,config);
 };
 
-const updateKhachHangByAdmin = (data) => {
-    return instance.put(`/api/update`, data);
+const updateKhachHangByAdmin = (data, config) => {
+    return instance.put(`/api/update`, data, config);
 };
 
-const deleteKhachHang = (id) => {
-    return instance.delete(`/api/delete/${id}`);
+const deleteKhachHang = (id, config) => {
+    return instance.delete(`/api/delete/${id}`, config);
 };
 
-const getKhachHangById = (id) => {
+const getKhachHangById = (id, config) => {
     console.log(id);
 
-    return instance.get(`/api/khach-hang/${id}`);
+    return instance.get(`/api/khach-hang/${id}`, config);
 };
 export {
     RegisterKH,

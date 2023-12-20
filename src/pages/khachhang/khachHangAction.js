@@ -14,7 +14,10 @@ const ActionKhachHang = () => {
     useEffect(() => {
         if (id !== 'them') {
             (async () => {
-                const res = await getKhachHangById(id);
+                const config = {
+                    withCredentials: true,
+                };
+                const res = await getKhachHangById(id, config);
 
                 if (res) {
                     const ngaysinhfm = dayjs(res[0].NgaySinh || dayjs().format('YYYY-MM-DD'), 'YYYY-MM-DD');
@@ -45,8 +48,10 @@ const ActionKhachHang = () => {
                 DiaChi: values.DiaChi,
                 MaTKKH: values.MaTKKH,
             };
-
-            const res = await updateKhachHangByAdmin(body);
+            const config = {
+                withCredentials: true,
+            };
+            const res = await updateKhachHangByAdmin(body, config);
 
             if (res.message) {
                 notification.open({
