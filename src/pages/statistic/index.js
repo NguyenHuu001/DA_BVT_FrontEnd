@@ -150,7 +150,6 @@ function Statistic() {
                 withCredentials: true,
             };
             await getSaleTicketTrain(config).then((res) => {
-                console.log(res);
                 setDataSaleTicket(res);
             });
         } catch (error) {

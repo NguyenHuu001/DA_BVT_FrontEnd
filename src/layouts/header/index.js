@@ -90,6 +90,15 @@ function Header() {
                                                             >
                                                                 Danh sách khách hàng
                                                             </Link>
+                                                        </div>{' '}
+                                                        <hr />
+                                                        <div>
+                                                            <Link
+                                                                to="/chuyen-tau"
+                                                                style={{ textDecoration: 'none', color: '#053878' }}
+                                                            >
+                                                                Chuyến tàu
+                                                            </Link>
                                                         </div>
                                                         <hr />
                                                         <div className="mt-2">

@@ -44,6 +44,10 @@ const getSale_Cancel_Ticket = (config) => {
 const getSaleTicketTrain = (config) => {
     return instance.get('api/saleTicketTrain', config);
 };
+// Lấy thông tin các chuyến tàu phía Admin
+const getDetailTrains = (config) => {
+    return instance.get('api/selectDetailTrains', config);
+};
 //Đăng ký
 const RegisterKH = (data) => {
     return instance.post('/api/createAccountKH', data);
@@ -68,6 +72,10 @@ const forgetPassWord = (Email) => {
 const cancelTickets = (data) => {
     return instance.post(`/api/cancelTickets`, data);
 };
+// Thêm chuyến tàu Admin
+const addTrains = (data, config) => {
+    return instance.post(`/api/addTrains`, data, config);
+};
 //Xác nhận hủy vé
 const confimCancelTicket = (data, config) => {
     return instance.post(`/api/confimCancelTicket`, data, config);
@@ -78,7 +86,7 @@ const updateDetailTK = (data, config) => {
 };
 //Thêm
 const getAllKhachHang = (config) => {
-    return instance.get(`/api/all-khach-hang`,config);
+    return instance.get(`/api/all-khach-hang`, config);
 };
 
 const updateKhachHangByAdmin = (data, config) => {
@@ -118,4 +126,6 @@ export {
     updateKhachHangByAdmin,
     deleteKhachHang,
     getKhachHangById,
+    getDetailTrains,
+    addTrains,
 };
