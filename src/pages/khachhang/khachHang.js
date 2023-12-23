@@ -112,8 +112,8 @@ const KhachHang = () => {
     };
     return (
         <>
-            <div className="flex flex-wrap mt-32">
-                <div className="w-full mb-12 px-4">
+            <div className="container flex flex-wrap mt-32" >
+                <div className="w-full mb-12 px-4" >
                     <div className="relative">
                         {/* <Divider orientation="left" className="text-white">
                             <Link to={'/khach-hang/them'}>

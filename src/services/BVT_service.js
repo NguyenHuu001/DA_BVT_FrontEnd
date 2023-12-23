@@ -46,7 +46,11 @@ const getSaleTicketTrain = (config) => {
 };
 // Lấy thông tin các chuyến tàu phía Admin
 const getDetailTrains = (config) => {
-    return instance.get('api/selectDetailTrains', config);
+    return instance.get('api/selectDetailAllChuyenTau', config);
+};
+// Lấy thông tin của 1 chuyến tàu với Mã chi tiết chuyến tàu
+const selectDetailChuyenTau = (MaCTCT, config) => {
+    return instance.get(`api/selectDetailChuyenTau/${MaCTCT}`, config);
 };
 //Đăng ký
 const RegisterKH = (data) => {
@@ -84,6 +88,10 @@ const confimCancelTicket = (data, config) => {
 const updateDetailTK = (data, config) => {
     return instance.put('/api/updateKhachHang', data, config);
 };
+//Update chi tiết chuyến tàu
+const updateTrain = (data, config) => {
+    return instance.put('/api/updateTrain', data, config);
+};
 //Thêm
 const getAllKhachHang = (config) => {
     return instance.get(`/api/all-khach-hang`, config);
@@ -98,8 +106,6 @@ const deleteKhachHang = (id, config) => {
 };
 
 const getKhachHangById = (id, config) => {
-    console.log(id);
-
     return instance.get(`/api/khach-hang/${id}`, config);
 };
 export {
@@ -128,4 +134,6 @@ export {
     getKhachHangById,
     getDetailTrains,
     addTrains,
+    selectDetailChuyenTau,
+    updateTrain,
 };

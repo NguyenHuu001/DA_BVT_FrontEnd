@@ -125,11 +125,14 @@ const ChuyenTau = () => {
     };
     return (
         <>
-            <div className="flex flex-wrap mt-32">
+            <div className="container flex flex-wrap mt-32 ">
                 <div className="w-full mb-12 px-4">
+                    <h1 style={{ textTransform: 'uppercase', fontWeight: '600', color: '#fff', textAlign: 'center' }}>
+                        Tất cả chuyến tàu
+                    </h1>
                     <div className="relative">
                         <Divider orientation="left" className="text-white">
-                            <Link to={'/chuyen-tau/them'}>
+                            <Link to={'/chuyen-tau/them'} style={{ textDecoration: 'none' }}>
                                 <Button
                                     type="default"
                                     className="bg-gray"

@@ -81,8 +81,11 @@ const ActionKhachHang = () => {
         // }
     };
     return (
-        <>
-            <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
+        <div className="d-flex justify-content-center">
+            <div
+                className="container m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl"
+                style={{ borderRadius: '8px' }}
+            >
                 <Form layout="vertical" form={form} onFinish={onFinish} hideRequiredMark>
                     <Row gutter={24}>
                         <Col span={12}>
@@ -212,7 +215,7 @@ const ActionKhachHang = () => {
                     </Form.Item>
                 </Form>
             </div>
-        </>
+        </div>
     );
 };
 
