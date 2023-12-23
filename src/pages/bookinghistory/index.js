@@ -56,7 +56,7 @@ function BookingHistory() {
     };
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN');
-    }   
+    }
     const fetchHistory = async () => {
         try {
             const config = {
@@ -194,6 +194,7 @@ function BookingHistory() {
                                                 <Input
                                                     value={tenTaiKhoan}
                                                     onChange={(e) => setTenTaiKhoan(e.target.value)}
+                                                    style={{ textTransform: 'uppercase' }}
                                                 />
 
                                                 <label>Số tài khoản:</label>
@@ -215,6 +216,9 @@ function BookingHistory() {
                                                         </Select.Option>
                                                     ))}
                                                 </Select>
+                                                <span className="mt-2" style={{ color: 'red' }}>
+                                                    (*) Hủy vé sẽ trừ 20% giá trị vé
+                                                </span>
                                             </Modal>
                                         </td>
                                     </tr>
@@ -224,8 +228,8 @@ function BookingHistory() {
                 </div>
                 <div className="d-flex justify-content-end me-4 mt-2 mb-5">
                     <span style={{ color: 'red' }}>
-                        (*) Khi yêu cầu hủy vé bạn cần liên hệ nơi bán vé và cung cấp "Mã vé tàu" cho nhân viên để xác
-                        nhận hủy{' '}
+                        (*) Khi yêu cầu hủy vé bạn cần cung cấp số tài khoản ngân hàng để bên phía nhà tàu chuyển lại
+                        tiền{' '}
                     </span>
                 </div>
             </div>

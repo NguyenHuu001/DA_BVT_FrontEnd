@@ -1,10 +1,10 @@
-import { Breadcrumb, Button, Col, Divider, Popconfirm, Table } from 'antd';
+import { Breadcrumb, Button, Col, Divider, Popconfirm, Table, notification } from 'antd';
 import BreadcrumbItem from 'antd/es/breadcrumb/BreadcrumbItem';
 import { Link } from 'react-router-dom';
 
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import { getDetailTrains } from '../../services/BVT_service';
+import { deleteTrain, getDetailTrains } from '../../services/BVT_service';
 const ChuyenTau = () => {
     const [detailTrains, setDetailTrains] = useState([]);
 
@@ -87,7 +87,7 @@ const ChuyenTau = () => {
                         <Popconfirm
                             title="Xóa dữ liệu"
                             description="Bạn chắc xóa dữ liệu này?"
-                            onConfirm={() => confirm()}
+                            onConfirm={() => confirm(MaChuyenTau)}
                             okText="Đồng ý"
                             cancelText="Hủy"
                         >
@@ -103,25 +103,21 @@ const ChuyenTau = () => {
 
     //Api xóa thì mở cái này ra
     const confirm = async (id) => {
-        // const res = await deleteKhachHang(id);
-        // //Check response message khi xóa trả ra gì
-        // if (res.message == 'Xóa chuyến tàu thành công!') {
-        //     notification.open({
-        //         type: 'success',
-        //         message: 'Xóa chuyến tàu thành công!',
-        //         description: '',
-        //         duration: 1,
-        //     });
-        //     setTimeout(() => {
-        //         window.location.reload();
-        //     }, 3000);
-        // } else
-        //     notification.open({
-        //         type: 'error',
-        //         message: 'Xóa chuyến tàu không thành công!',
-        //         description: '',
-        //         duration: 1,
-        //     });
+        try {
+            const config = {
+                withCredentials: true,
+            };
+            await deleteTrain(id, config);
+            notification.open({
+                type: 'success',
+                message: 'Cập nhật thông tin chuyến tàu thành công!',
+                description: '',
+                duration: 1,
+            });
+            getAlllTrains();
+        } catch (error) {
+            console.log(error);
+        }
     };
     return (
         <>

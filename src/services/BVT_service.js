@@ -92,6 +92,10 @@ const updateDetailTK = (data, config) => {
 const updateTrain = (data, config) => {
     return instance.put('/api/updateTrain', data, config);
 };
+//Xóa chuyến tàu
+const deleteTrain = (MaCTCT, config) => {
+    return instance.delete(`/api/deleteTrain/${MaCTCT}`, config);
+};
 //Thêm
 const getAllKhachHang = (config) => {
     return instance.get(`/api/all-khach-hang`, config);
@@ -136,4 +140,5 @@ export {
     addTrains,
     selectDetailChuyenTau,
     updateTrain,
+    deleteTrain,
 };

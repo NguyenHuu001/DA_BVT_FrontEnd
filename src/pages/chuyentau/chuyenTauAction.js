@@ -5,7 +5,7 @@ import useAsync from '../../hook/useAsync';
 import { useNavigate, useParams } from 'react-router-dom';
 //Api
 import { addTrains, getALLChuyenTau, selectDetailChuyenTau, updateTrain } from '../../services/BVT_service';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Option } from 'antd/es/mentions';
 
 const ActionChuyenTau = () => {
