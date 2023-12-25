@@ -81,7 +81,10 @@ export const BookTicketProvider = ({ children }) => {
                 });
             } else {
                 setChooseDetaiTau([]);
-                if (step !== 0) setStep(0);
+                if (step !== 0) {
+                    setStep(0);
+                    setTitle(arr_titile[0]);
+                }
                 await searchChuyenTau(maChuyenTau, soLuong, date).then((res) => {
                     if (res.length > 0) {
                         setDetailTau(res);

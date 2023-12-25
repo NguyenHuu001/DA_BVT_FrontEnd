@@ -87,7 +87,7 @@ const ChuyenTau = () => {
                         <Popconfirm
                             title="Xóa dữ liệu"
                             description="Bạn chắc xóa dữ liệu này?"
-                            onConfirm={() => confirm(MaChuyenTau)}
+                            onConfirm={() => confirmDelete(MaChuyenTau)}
                             okText="Đồng ý"
                             cancelText="Hủy"
                         >
@@ -102,11 +102,12 @@ const ChuyenTau = () => {
     ];
 
     //Api xóa thì mở cái này ra
-    const confirm = async (id) => {
+    const confirmDelete = async (id) => {
         try {
             const config = {
                 withCredentials: true,
             };
+            console.log(id);
             await deleteTrain(id, config);
             notification.open({
                 type: 'success',
@@ -116,9 +117,15 @@ const ChuyenTau = () => {
             });
             getAlllTrains();
         } catch (error) {
-            console.log(error);
+            notification.open({
+                type: 'error',
+                message: 'Xóa thất bại',
+                description: '',
+                duration: 1,
+            });
         }
     };
+    const confirm = async (id) => {};
     return (
         <>
             <div className="container flex flex-wrap mt-32 ">

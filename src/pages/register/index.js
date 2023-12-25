@@ -2,7 +2,21 @@ import { Button, Form, Input, notification } from 'antd';
 import { RegisterKH } from '../../services/BVT_service';
 import { useNavigate } from 'react-router-dom';
 const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    if (errorInfo === undefined) {
+        notification.open({
+            type: 'error',
+            message: 'Đăng ký không thành công',
+            description: 'Mật khẩu không trùng',
+            duration: 2,
+        });
+    } else {
+        notification.open({
+            type: 'error',
+            message: 'Đăng ký không thành công',
+            description: 'Vui lòng nhập đủ thông tin',
+            duration: 2,
+        });
+    }
 };
 function Register() {
     const navigate = useNavigate();
@@ -30,7 +44,7 @@ function Register() {
                 notification.open({
                     type: 'error',
                     message: 'Đăng ký không thành công',
-                    description: 'Tài khoản hoặc Email đã có người sử dụng',
+                    description: 'Tên đăng nhập hoặc Email đã có người sử dụng',
                     duration: 2,
                 });
             }

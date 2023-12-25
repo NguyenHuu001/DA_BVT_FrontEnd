@@ -114,7 +114,9 @@ function CancelTicketsAd() {
                                     <tr key={value.HoTenKhachDiChung + index}>
                                         <td className="no-wrap">{value.MaDatVe}</td>
                                         <td className="no-wrap">{value.TenChuyen}</td>
-                                        <td className="no-wrap">{value.TenTaiKhoan}</td>
+                                        <td className="no-wrap" style={{ textTransform: 'uppercase' }}>
+                                            {value.TenTaiKhoan}
+                                        </td>
                                         <td className="no-wrap">{value.SoTaiKhoan}</td>
                                         <td className="no-wrap">{value.TenNganHang}</td>
                                         <td className="no-wrap">{formatCurrency(value.GiaVe * 0.8)} VNĐ</td>

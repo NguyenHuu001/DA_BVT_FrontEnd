@@ -73,11 +73,9 @@ function WrapBookTicket(hideNavbar) {
 
             <div className="container mt-5  p-0">
                 <div className="bg-white">
-                    {!hideNavbar && (
-                        <div className="title d-flex justify-content-center align-items-center">
-                            <h3 className="mb-0">{title}</h3>
-                        </div>
-                    )}
+                    <div className="title d-flex justify-content-center align-items-center">
+                        <h3 className="mb-0">{title}</h3>
+                    </div>
 
                     {step === 0 && <HanhTrinhDi value={detailTau} />}
                     {step === 1 && <NguoiDatVe />}
